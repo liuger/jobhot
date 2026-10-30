@@ -13,8 +13,8 @@ import { BROWSER_MAX_SECONDS } from "./app/lib/api.server.ts";
 import { proxyToApi } from "./app/lib/api-proxy.server.ts";
 import { logError } from "./app/lib/errors.server.ts";
 
-const PORT = Number(process.env.WEB_PORT || 3000);
-const HOST = process.env.WEB_HOST || "127.0.0.1";
+const PORT = Number(process.env.PORT || process.env.WEB_PORT || 3000);
+const HOST = process.env.WEB_HOST || (process.env.PORT ? "0.0.0.0" : "127.0.0.1");
 /**
  * Whether a reverse proxy in front (Caddy, nginx) records the visitor in X-Forwarded-For. Without one
  * the header is never believed: a visitor could name any address and slip past the api's per-visitor
