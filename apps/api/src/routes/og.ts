@@ -69,6 +69,8 @@ export function registerOg(app: FastifyInstance) {
       source: d.source.name,
       date: beijingDate(d.timelineAt),
       score: d.selected && ITEM_COPY.showScore ? d.score : null,
+      // ?qr=0 drops the QR card for feeds that disallow QR codes; the ETag covers the flag.
+      ...((req.query as { qr?: string }).qr === "0" ? { qr: false } : {}),
     };
     const tag = `"poster-${posterEtag(poster)}"`;
     reply.header("ETag", tag).header("Cache-Control", CONTENT_IMAGE_CACHE);

@@ -5,7 +5,7 @@ import { renderSVG } from "uqr";
 import { SITE } from "@aihot/site";
 import { brandMark, clamp, h, nameMark, renderPng, SITE_HOST, type Node } from "./og.ts";
 
-export const POSTER_TEMPLATE_VERSION = "poster-2026-09-29.1";
+export const POSTER_TEMPLATE_VERSION = "poster-2026-10-31.1";
 const WIDTH = 1080;
 const HEIGHT = 1440;
 
@@ -17,6 +17,8 @@ export interface Poster {
   source: string;
   date: string;
   score: number | null;
+  /** Without the QR card the poster carries only text branding, for feeds that disallow QR codes. */
+  qr?: boolean;
 }
 
 const INK = "#0e191b";
@@ -28,7 +30,10 @@ async function tree(p: Poster): Promise<Node> {
   const titleSize = len > 48 ? 58 : len > 30 ? 66 : 76;
   // The summary takes the room the title leaves.
   const summary = p.summary ? clamp(p.summary, len > 48 ? 120 : len > 30 ? 150 : 180) : null;
-  const qr = `data:image/svg+xml;base64,${Buffer.from(renderSVG(p.url, { border: 0, ecc: "M", blackColor: INK, whiteColor: "#ffffff" })).toString("base64")}`;
+  const withQr = p.qr !== false;
+  const qr = withQr
+    ? `data:image/svg+xml;base64,${Buffer.from(renderSVG(p.url, { border: 0, ecc: "M", blackColor: INK, whiteColor: "#ffffff" })).toString("base64")}`
+    : null;
   return h(
     "div",
     {
@@ -58,18 +63,28 @@ async function tree(p: Poster): Promise<Node> {
       summary ? h("div", { display: "flex", marginTop: 36, fontSize: 34, lineHeight: 1.7, color: "#3a484c" }, summary) : null,
       h("div", { display: "flex", marginTop: 36, fontSize: 28, color: "#66757a" }, clamp(`来源：${p.source}`, 34)),
       h("div", { display: "flex", flex: 1 }),
-      h(
-        "div",
-        { display: "flex", alignItems: "center", padding: "36px 40px", borderRadius: 32, backgroundColor: "#ffffff", boxShadow: "0 1px 2px rgba(14,25,27,0.06), 0 12px 32px rgba(14,25,27,0.07)" },
-        [
-          h("img", { width: 200, height: 200 }, undefined, { src: qr, width: 200, height: 200 }),
-          h("div", { display: "flex", flexDirection: "column", marginLeft: 44, flex: 1 }, [
-            h("div", { display: "flex", fontSize: 36, fontWeight: 700, color: INK }, "长按识别二维码"),
-            h("div", { display: "flex", marginTop: 14, fontSize: 28, lineHeight: 1.5, color: "#66757a" }, "阅读全文、中文译文与原文链接"),
-            h("div", { display: "flex", marginTop: 22, fontSize: 26, color: ACCENT }, SITE_HOST),
-          ]),
-        ],
-      ),
+      withQr
+        ? h(
+            "div",
+            { display: "flex", alignItems: "center", padding: "36px 40px", borderRadius: 32, backgroundColor: "#ffffff", boxShadow: "0 1px 2px rgba(14,25,27,0.06), 0 12px 32px rgba(14,25,27,0.07)" },
+            [
+              h("img", { width: 200, height: 200 }, undefined, { src: qr, width: 200, height: 200 }),
+              h("div", { display: "flex", flexDirection: "column", marginLeft: 44, flex: 1 }, [
+                h("div", { display: "flex", fontSize: 36, fontWeight: 700, color: INK }, "长按识别二维码"),
+                h("div", { display: "flex", marginTop: 14, fontSize: 28, lineHeight: 1.5, color: "#66757a" }, "阅读全文、中文译文与原文链接"),
+                h("div", { display: "flex", marginTop: 22, fontSize: 26, color: ACCENT }, SITE_HOST),
+              ]),
+            ],
+          )
+        : h(
+            "div",
+            { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px 40px", borderRadius: 32, backgroundColor: "#ffffff", boxShadow: "0 1px 2px rgba(14,25,27,0.06), 0 12px 32px rgba(14,25,27,0.07)" },
+            [
+              h("div", { display: "flex", fontSize: 40, fontWeight: 700, color: INK }, SITE.name),
+              h("div", { display: "flex", marginTop: 14, fontSize: 28, lineHeight: 1.5, color: "#66757a" }, SITE.tagline),
+              h("div", { display: "flex", marginTop: 20, fontSize: 26, color: ACCENT }, SITE_HOST),
+            ],
+          ),
       h("div", { display: "flex", justifyContent: "center", marginTop: 40, fontSize: 24, color: "#98a4a7" }, `${SITE.name} · ${SITE.tagline}`),
     ].filter(Boolean),
   );
