@@ -120,6 +120,13 @@
 - 接口本身返回数组时，省略 `itemsPath`。`titlePaths`、`summaryPaths`、`authorPaths` 是候选路径数组，按顺序取第一个非空值，例如 `["title", "name"]`。
 - 已有完整网址时用 `{raw:url}`；只有 slug 时可用 `https://example.com/posts/{slug}`。`{字段路径}` 会编码字段值，`{raw:字段路径}` 原样插入。JSON 列表不会自动把相对网址补成绝对网址，模板应产出完整的 HTTP(S) 地址。
 - `summaryIsBody`：确认接口里的摘要就是全文时设为 `true`，把 `summaryPaths` 取到的文字当正文，不再去抓原文页。
+- `bodyParts`：正文分散在多个字段时（招聘接口的「岗位描述」和「任职要求」），按顺序列出字段路径，用两个换行拼成正文，并自动按 `summaryIsBody` 处理，不必再配 `summaryPaths`。
+- `detailBody`：列表接口只给标题和链接、正文要按条目再请求一次时（大易 / hotjob.cn 这类招聘站的 `listPosition` + `listPositionDetail`）用这个，配 `urlTemplate`（含 `{字段}`，取详情地址）、可选 `method`（默认 GET）与 `bodyForm`（POST 表单，值同样支持 `{字段}`）、`dataPath`（详情 JSON 的根，如 `data`）、`bodyPaths`（拼成正文的字段，如 `["workContent","serviceCondition"]`）、`maxFetches`（单次抓取最多补几条，默认 20）。详情接口要 JSON 请求体时改用 `bodyJson`（对象，里面的字符串都是模板，如 `{"id": "{raw:id}", "channelDetailIds": [1]}`），与 `bodyForm` 二选一。补齐成功即视为正文就绪，不再去抓原文页。
+- `pages`：列表把每页条数写死（招聘站常见每页 15 条）、需要多翻几页时设为页数（1–10）。`url` 里的 `currentPage=N` 会被逐页替换，其余参数不变；单页返回空数组即停止。
+- `pageBodyPath`：分页号在 POST 请求体里而不是网址里时（如米哈游的 `pageNo`），填该字段的点路径；每次请求把当前页码写进去，`url` 与其余 body 字段不变。
+- `pageQueryParam`：分页号在网址里、但参数名不是 `currentPage` 时填参数名（如北大就业网的 `pageNo`，`url` 写成 `...?type=2&pageNo=1`）。只认 query string 或表单、把 JSON body 当摆设的接口属于这一类。
+- `preserveUrlFragment`：详情地址靠 `#` 后面的路由区分条目时（`https://jobs.example.com/#/position/123`）必须设为 `true`，否则同一路径会按「同一个网址」去重，整批只剩一条。
+- 接口只接受 POST、参数又不受位置限制时（如招聘站的列表接口），把参数直接写在 `url` 的查询串里、`method` 设 `POST` 即可，不必另配请求体。
 - 日期建议返回带时区的 ISO 字符串；`2026-09-30 17:43:58` 这类不带时区的时间，与网页列表一样按 `publishedAtUtcOffset` 读（默认 `+08:00`）；数字时间戳分别设 `publishedAtUnit: "epoch_s"`（秒）或 `"epoch_ms"`（毫秒），`20261001` 这类日期设 `"yyyymmdd"`。
 - 缺少标题或无法生成链接的条目会跳过。非空数组全部映射失败时，会报 `no items mapped (check title/url paths)`；路径不是数组时，会报 `items path did not resolve to an array`。
 

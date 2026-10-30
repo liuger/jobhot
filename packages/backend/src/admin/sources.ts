@@ -115,13 +115,16 @@ export async function previewSource(draft: Pick<SourceRow, "id" | "kind" | "conf
   };
 }
 
+/** Source tiers. ARCHIVE: a source without publish dates — kept for the archive, never 精选. */
+const TIERS = z.enum(["T1", "T1_5", "T2", "EXCLUDE_MP", "ARCHIVE"]);
+
 const EDITABLE = z
   .object({
     name: z.string().min(1).max(200),
     kind: z.enum(REPLACEABLE_SOURCE_KINDS),
     enabled: z.boolean(),
     interval_minutes: z.number().int().min(1).max(1440),
-    tier: z.enum(["T1", "T1_5", "T2", "EXCLUDE_MP"]),
+    tier: TIERS,
     participation_mode: z.enum(["editorial", "hot_signal", "isolated"]),
     signal_group_id: z.string().max(120).nullable(),
     first_party: z.boolean(),
@@ -224,7 +227,7 @@ const CreateSchema = z
     name: z.string().min(1).max(200),
     kind: z.enum(["rss", "web_list", "json_list", "x_search", "mp_account", "external"]),
     config: z.record(z.string(), z.unknown()),
-    tier: z.enum(["T1", "T1_5", "T2", "EXCLUDE_MP"]).default("T2"),
+    tier: TIERS.default("T2"),
     participation_mode: z.enum(["editorial", "hot_signal", "isolated"]).default("editorial"),
     interval_minutes: z.number().int().min(1).max(1440).default(30),
     first_party: z.boolean().default(false),

@@ -266,7 +266,7 @@ async function missedFacts(start: Date, end: Date): Promise<Array<{ key: string;
     FROM fact_articles fa JOIN publications p ON p.article_id = fa.article_id JOIN sources s ON s.id = p.source_id
     JOIN facts f ON f.id = fa.fact_id LEFT JOIN stories st ON st.id = f.story_id
     WHERE fa.fact_id = ANY(${found.map((f) => f.fact_id)}::bigint[]) AND ${evidenceCondition()} AND ${listedCondition(end)}
-      AND s.participation_mode = 'editorial' AND s.tier <> 'EXCLUDE_MP' AND NOT p.backfill AND p.timeline_at < ${end}`;
+      AND s.participation_mode = 'editorial' AND s.tier NOT IN ('EXCLUDE_MP', 'ARCHIVE') AND NOT p.backfill AND p.timeline_at < ${end}`;
   return [...groupBy(rows, factKeyOf)]
     .filter(([, members]) => members.some((r) => representativePriority(r) < 3))
     .map(([key, members]) => ({ key, rows: members }));

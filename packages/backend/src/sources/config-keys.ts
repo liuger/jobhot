@@ -15,8 +15,9 @@ const KEYS: Record<SourceRow["kind"], string[]> = {
   ],
   json_list: [
     ...COLLECTED, "url", "mode", "method", "headers", "bodyJson", "jsonKey", "windowVar", "itemsPath", "itemsObjectValues",
-    "titlePaths", "summaryPaths", "summaryIsBody", "authorPaths", "publishedAtPath", "publishedAtUnit", "publishedAtUtcOffset", "externalIdPath",
-    "urlTemplate", "urlTemplateFallback", "rawDropKeys", "requireBoolean", "minNumeric",
+    "titlePaths", "summaryPaths", "summaryIsBody", "bodyParts", "detailBody", "authorPaths", "publishedAtPath", "publishedAtUnit", "publishedAtUtcOffset", "externalIdPath",
+    "urlTemplate", "urlTemplateFallback", "rawDropKeys", "requireBoolean", "minNumeric", "pages", "pageBodyPath", "pageQueryParam",
+    "preserveUrlFragment",
   ],
   // X accounts are mostly read in shards, which apply only these.
   x_search: [...PUBLISHER, "_aihot", "ingestNoiseFilter", "itemUrlPrefixRewrite", "query", "searchType"],
@@ -35,6 +36,8 @@ const NESTED: Record<string, string[]> = {
     "maxFetches", "publishedAtSelector", "publishedAtRegex", "publishedAtUtcOffset", "publishedAtAuthoritative", "upgradeDatePrecision",
     "titleSelector", "titleRegex", "titleAuthoritative", "summarySelector",
   ],
+  // One request per item, for listings whose list endpoint leaves the body out (job boards).
+  detailBody: ["urlTemplate", "method", "bodyForm", "bodyJson", "dataPath", "bodyPaths", "maxFetches"],
 };
 
 const VALUES: Record<string, string[]> = {
@@ -43,8 +46,23 @@ const VALUES: Record<string, string[]> = {
   parseMode: ["html", "markdown", "docusaurus_changelog", "intercom_changelog"],
 };
 
-function utcInstant(value: unknown): boolean {
-  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(value)) return false;
+function detailBodyOk(value: unknown): boolean {
+  if (!value || typeof value !== "object") return false;
+  const d = value as Record<string, unknown>;
+  if (typeof d.urlTemplate !== "string" || d.urlTemplate === "") return false;
+  // The item's own key may live in the body instead of the address (one endpoint, id in the JSON body).
+  const templated = d.urlTemplate.includes("{")
+    || JSON.stringify(d.bodyJson ?? {}).includes("{")
+    || JSON.stringify(d.bodyForm ?? {}).includes("{");
+  if (!templated) return false;
+  if (!Array.isArray(d.bodyPaths) || d.bodyPaths.length === 0) return false;
+  if (!d.bodyPaths.every((p) => typeof p === "string" && p.trim() !== "")) return false;
+  if (d.method !== undefined && !["GET", "POST"].includes(String(d.method))) return false;
+  if (d.bodyJson !== undefined && (!d.bodyJson || typeof d.bodyJson !== "object" || Array.isArray(d.bodyJson))) return false;
+  return true;
+}
+
+function utcInstant(value: unknown): boolean {  if (typeof value !== "string" || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{3})?Z$/.test(value)) return false;
   const date = new Date(value);
   return Number.isFinite(date.getTime()) && date.toISOString() === (value.includes(".") ? value : value.replace(/Z$/, ".000Z"));
 }
@@ -57,6 +75,10 @@ export function unsupportedConfig(kind: SourceRow["kind"], config: Record<string
     if (!allowed.has(key)) out.push(key);
     else if (key === "publisherRequiresDiscovery" && (typeof value !== "boolean"
       || value && (!Array.isArray(config.publisherUrlPrefixes) || config.publisherUrlPrefixes.length === 0))) out.push(key);
+    else if (key === "bodyParts" && (!Array.isArray(value) || !value.every((v) => typeof v === "string" && v.trim() !== ""))) out.push(key);
+    else if (key === "detailBody" && !detailBodyOk(value)) out.push(key);
+    else if (key === "pages" && (!Number.isInteger(value) || (value as number) < 1 || (value as number) > 10)) out.push(key);
+    else if (key === "pageBodyPath" && (typeof value !== "string" || value.trim() === "" || !config.bodyJson)) out.push(key);
     else if (key === "publishedAfter" && !utcInstant(value)) out.push(key);
     else if (key === "publisherUrlPrefixes" && (!Array.isArray(value) || !value.every((v) => {
       if (typeof v !== "string") return false;

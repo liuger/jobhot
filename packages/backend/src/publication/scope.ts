@@ -19,9 +19,13 @@ export function releasedCondition(now: Date) {
   return sql`(NOT p.selected OR p.visible_after <= ${now})`;
 }
 
-/** Listed on public surfaces at `now`: public, pool eligible, and released by then. */
+/**
+ * Listed on public surfaces at `now`: public, pool eligible, released by then, and dated.
+ * An article without any publication time has no trustworthy place on a timeline, so it stays
+ * off every public listing (it remains queryable internally and leaves once a date is filled in).
+ */
 export function listedCondition(now: Date) {
-  return sql`p.visibility = 'public' AND p.eligible AND ${releasedCondition(now)}`;
+  return sql`p.visibility = 'public' AND p.eligible AND p.published_at IS NOT NULL AND ${releasedCondition(now)}`;
 }
 
 /** Story reports include older editorial material outside the pool, but never withdrawn or not yet released content. */

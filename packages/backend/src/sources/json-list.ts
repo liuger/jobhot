@@ -66,7 +66,9 @@ function toDate(v: unknown, unit: string | undefined, utcOffset: string | undefi
   // A time without a zone is in the source's offset, as list pages read it; any other text as Date.parse reads it.
   if (ZONELESS_TIME.test(text)) return parseLooseDate(text, utcOffset);
   const t = Date.parse(text);
-  return Number.isFinite(t) ? new Date(t) : null;
+  if (Number.isFinite(t)) return new Date(t);
+  // Dates a source prints with units — "2026年10月29日", "2026/10/29" — which Date.parse leaves unread.
+  return parseLooseDate(text, utcOffset);
 }
 
 function findKey(obj: unknown, key: string, depth = 0): unknown {
@@ -144,6 +146,104 @@ function embeddedJson(html: string, source: SourceRow): unknown {
   throw new FetchError(`embedded key ${key} not found`);
 }
 
+/** The request body for one page: the base body with the page number written at pageBodyPath. */
+function pageBodyOf(base: Record<string, unknown>, path: string, page: number): Record<string, unknown> {
+  const body = JSON.parse(JSON.stringify(base)) as Record<string, unknown>;
+  if (path) setPath(body, path, page);
+  return body;
+}
+
+/** A listing that carries only titles and links (a job board's list endpoint), whose duties live behind one
+ *  request per item. `detailBody` describes that request; the fields it names are the article's body. */
+interface DetailBodyRule {
+  urlTemplate?: string;
+  method?: string;
+  bodyForm?: Record<string, string>;
+  /** A JSON request body: every string is a template, built per item. */
+  bodyJson?: Record<string, unknown>;
+  dataPath?: string;
+  bodyPaths?: string[];
+  maxFetches?: number;
+}
+
+/** Copies a JSON template with every string rendered against the item ("{raw:id}" keeps the value as is). */
+function renderJsonTemplate(template: unknown, item: unknown): unknown {
+  if (typeof template === "string") return renderTemplate(template, item) ?? "";
+  if (Array.isArray(template)) return template.map((v) => renderJsonTemplate(v, item));
+  if (template && typeof template === "object") {
+    return Object.fromEntries(Object.entries(template as Record<string, unknown>).map(([k, v]) => [k, renderJsonTemplate(v, item)]));
+  }
+  return template;
+}
+
+/** Writes a value at a dot path of a JSON object, creating the objects it needs. */
+function setPath(target: Record<string, unknown>, path: string, value: unknown): void {
+  const segs = path.split(".").filter(Boolean);
+  let cur: Record<string, unknown> = target;
+  for (const seg of segs.slice(0, -1)) {
+    const next = cur[seg];
+    if (!next || typeof next !== "object" || Array.isArray(next)) cur[seg] = {};
+    cur = cur[seg] as Record<string, unknown>;
+  }
+  if (segs.length) cur[segs.at(-1)!] = value;
+}
+
+/** A source's own headers may name Content-Type in another case; two spellings of one header both survive
+ * an object spread, and the server reads whichever came first. Set the type by replacing all spellings. */
+function withContentType(headers: Record<string, string>, type: string): Record<string, string> {
+  const out: Record<string, string> = {};
+  for (const [name, value] of Object.entries(headers)) if (name.toLowerCase() !== "content-type") out[name] = value;
+  out["content-type"] = type;
+  return out;
+}
+
+async function fillDetailBodies(source: SourceRow, out: Candidate[], items: unknown[], rule: DetailBodyRule): Promise<void> {
+  const template = String(rule.urlTemplate ?? "");
+  const bodyPaths = (rule.bodyPaths ?? []).map(String);
+  if (!template || !bodyPaths.length) return;
+  const max = Number.isFinite(Number(rule.maxFetches)) ? Math.max(1, Number(rule.maxFetches)) : 20;
+  const method = String(rule.method ?? "GET").toUpperCase();
+  const jsonTemplate = rule.bodyJson && typeof rule.bodyJson === "object" ? rule.bodyJson : null;
+  const headers: Record<string, string> = { accept: "application/json", ...(source.config.headers ?? {}) };
+  const jobs = out.slice(0, max).map((_, i) => i);
+  let next = 0;
+  const work = async () => {
+    while (next < jobs.length) {
+      const index = jobs[next++]!;
+      const item = items[index];
+      const url = renderTemplate(template, item);
+      if (!url) continue;
+      const body = method === "GET" ? undefined
+        : jsonTemplate ? JSON.stringify(renderJsonTemplate(jsonTemplate, item))
+        : new URLSearchParams(
+          Object.entries(rule.bodyForm ?? {}).map(([k, t]) => [k, renderTemplate(t, item) ?? ""] as [string, string]),
+        ).toString();
+      const contentType = jsonTemplate ? "application/json" : "application/x-www-form-urlencoded";
+      try {
+        const res = await fetchListing(url, {
+          redirectPolicy: "same-origin",
+          method,
+          headers: body ? withContentType(headers, contentType) : headers,
+          body,
+          timeoutMs: 20_000,
+        });
+        if (res.status !== 200) continue;
+        const root = rule.dataPath ? getPath(JSON.parse(res.text()), String(rule.dataPath)) : JSON.parse(res.text());
+        const parts = bodyPaths.map((p) => firstString(root, [p])).filter((v): v is string => !!v);
+        if (!parts.length) continue;
+        const text = stripTags(parts.join("\n\n"));
+        const cand = out[index]!;
+        cand.bodyText = text;
+        cand.bodyStatus = "ok";
+        cand.excerpt = collapseWhitespace(text).slice(0, 2000);
+      } catch {
+        // The listing's own fields still make a usable candidate; the body is fetched again next cycle.
+      }
+    }
+  };
+  await Promise.all([work(), work(), work(), work()]);
+}
+
 export async function fetchJsonList(source: SourceRow): Promise<Candidate[]> {
   const c = source.config;
   const url = String(c.url ?? "");
@@ -152,28 +252,55 @@ export async function fetchJsonList(source: SourceRow): Promise<Candidate[]> {
     const token = credential("collectors", "GITHUB_TOKEN");
     if (token) headers.authorization = `Bearer ${token}`;
   }
-  const res = await fetchListing(url, {
-    redirectPolicy: "same-origin",
-    method: c.method ?? "GET",
-    headers: c.bodyJson ? { ...headers, "content-type": "application/json" } : headers,
-    body: c.bodyJson ? JSON.stringify(c.bodyJson) : undefined,
-    timeoutMs: 25_000,
-  });
-  if (res.status !== 200) throw new FetchError(`HTTP ${res.status}`, res.status);
-  let data: unknown;
-  if (c.mode === "html_json_key" || c.mode === "html_window_var") data = embeddedJson(res.text(), source);
-  else {
-    try {
-      data = JSON.parse(res.text());
-    } catch {
-      throw new FetchError("response is not JSON");
+  const readPage = async (target: string, page: number) => {
+    const pageBody = c.bodyJson ? JSON.stringify(pageBodyOf(c.bodyJson as Record<string, unknown>, c.pageBodyPath, page)) : undefined;
+    const res = await fetchListing(target, {
+      redirectPolicy: "same-origin",
+      method: c.method ?? "GET",
+      headers: c.bodyJson ? withContentType(headers, "application/json") : headers,
+      body: pageBody,
+      timeoutMs: 25_000,
+    });
+    if (res.status !== 200) throw new FetchError(`HTTP ${res.status}`, res.status);
+    return res.text();
+  };
+  const resolveItems = (data: unknown): unknown[] => {
+    let list = c.itemsPath ? getPath(data, c.itemsPath) : c.jsonKey ? getPath(data, c.jsonKey) : data;
+    if (c.itemsObjectValues && list && typeof list === "object" && !Array.isArray(list)) list = Object.values(list);
+    if (!Array.isArray(list)) throw new FetchError("items path did not resolve to an array");
+    return list;
+  };
+
+  // pages: a listing that pages by a query parameter and caps a page's size (a job board's fixed 15) is read
+  // one page at a time; the URL's own currentPage is what moves, or — for a POST listing — the JSON body
+  // field named by pageBodyPath. pageQueryParam names the URL parameter when the site does not spell it
+  // currentPage (a servlet backend reading pageNo from the query string).
+  const pageBodyPath = typeof c.pageBodyPath === "string" ? c.pageBodyPath : "";
+  const bodyPaged = pageBodyPath !== "" && !!c.bodyJson;
+  const pageParam = typeof c.pageQueryParam === "string" && c.pageQueryParam ? c.pageQueryParam : "currentPage";
+  const pagePattern = new RegExp(`([?&]${pageParam.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}=)\\d+`);
+  const pageCount = /^html_/.test(String(c.mode ?? "")) ? 1 : Math.max(1, Math.min(10, Number(c.pages) || 1));
+  const items: unknown[] = [];
+  for (let p = 1; p <= pageCount; p++) {
+    const pageUrl = p === 1 ? url : url.replace(pagePattern, `$1${p}`);
+    if (p > 1 && !bodyPaged && pageUrl === url) break;
+    const text = await readPage(pageUrl, p);
+    let data: unknown;
+    if (c.mode === "html_json_key" || c.mode === "html_window_var") data = embeddedJson(text, source);
+    else {
+      try {
+        data = JSON.parse(text);
+      } catch {
+        throw new FetchError("response is not JSON");
+      }
     }
+    const pageItems = resolveItems(data);
+    items.push(...pageItems);
+    if (!pageItems.length) break;
   }
-  let items = c.itemsPath ? getPath(data, c.itemsPath) : c.jsonKey ? getPath(data, c.jsonKey) : data;
-  if (c.itemsObjectValues && items && typeof items === "object" && !Array.isArray(items)) items = Object.values(items);
-  if (!Array.isArray(items)) throw new FetchError("items path did not resolve to an array");
 
   const out: Candidate[] = [];
+  const used: unknown[] = [];
   for (const item of items) {
     if (c.requireBoolean && getPath(item, c.requireBoolean.path) !== c.requireBoolean.equals) continue;
     if (c.minNumeric && !(Number(getPath(item, c.minNumeric.path)) >= Number(c.minNumeric.min))) continue;
@@ -181,8 +308,13 @@ export async function fetchJsonList(source: SourceRow): Promise<Candidate[]> {
     const url = (c.urlTemplate && renderTemplate(c.urlTemplate, item)) || (c.urlTemplateFallback && renderTemplate(c.urlTemplateFallback, item));
     if (!title || !url) continue;
     const externalId = c.externalIdPath ? getPath(item, c.externalIdPath) : null;
-    const summary = firstString(item, c.summaryPaths);
-    const summaryIsBody = c.summaryIsBody === true && !!summary;
+    // bodyParts: several fields that together are the body (a job's duties plus its requirements),
+    // joined in the order given. They take precedence over summaryPaths when any of them has text.
+    const parts = Array.isArray(c.bodyParts)
+      ? (c.bodyParts as unknown[]).map((p) => firstString(item, [String(p)])).filter((v): v is string => !!v)
+      : [];
+    const summary = parts.length ? parts.join("\n\n") : firstString(item, c.summaryPaths);
+    const summaryIsBody = (c.summaryIsBody === true || parts.length > 0) && !!summary;
     out.push({
       url,
       title: collapseWhitespace(stripTags(title)),
@@ -193,7 +325,9 @@ export async function fetchJsonList(source: SourceRow): Promise<Candidate[]> {
       bodyStatus: summaryIsBody ? "ok" : "pending",
       raw: { externalId: externalId ?? null },
     });
+    used.push(item);
   }
+  if (c.detailBody) await fillDetailBodies(source, out, used, c.detailBody as DetailBodyRule);
   if (items.length > 0 && out.length === 0 && !c.requireBoolean && !c.minNumeric) throw new FetchError("no items mapped (check title/url paths)");
   return out;
 }

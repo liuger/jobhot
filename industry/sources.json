@@ -10,7 +10,6 @@
         "mode": "json_api",
         "method": "POST",
         "headers": {
-          "Content-Type": "application/json",
           "Origin": "https://www.iguopin.com",
           "Referer": "https://www.iguopin.com/"
         },
@@ -20,7 +19,9 @@
           "page_size": 30
         },
         "itemsPath": "data.list",
-        "titlePaths": ["title"],
+        "titlePaths": [
+          "title"
+        ],
         "urlTemplate": "{raw:link_url}",
         "publishedAtPath": "create_time",
         "externalIdPath": "id",
@@ -32,7 +33,10 @@
       "owner_entity_id": "iguopin",
       "participation_mode": "editorial",
       "interval_minutes": 120,
-      "tags": ["官方", "央国企"],
+      "tags": [
+        "官方",
+        "央国企"
+      ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     },
@@ -47,7 +51,9 @@
         "linkSelector": "a",
         "titleSelector": "a",
         "publishedAtSelector": "span",
-        "allowUrlPrefixes": ["https://rsj.beijing.gov.cn/xxgk/gkzp/"],
+        "allowUrlPrefixes": [
+          "https://rsj.beijing.gov.cn/xxgk/gkzp/"
+        ],
         "_aihot": {
           "initialBackfillLimit": 10
         }
@@ -56,7 +62,4379 @@
       "owner_entity_id": "bj-rsj",
       "participation_mode": "editorial",
       "interval_minutes": 180,
-      "tags": ["官方", "事业单位", "北京"],
+      "tags": [
+        "官方",
+        "事业单位",
+        "北京"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cq-gzw",
+      "name": "重庆市国资委·国企招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://gzw.cq.gov.cn/gqzp/",
+        "parseMode": "html",
+        "itemSelector": "ul.tab-item > li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtSelector": "span",
+        "allowUrlPrefixes": [
+          "https://gzw.cq.gov.cn/gqzp/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 15
+        }
+      },
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方",
+        "央国企",
+        "重庆"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "gd-rsj-sydw",
+      "name": "广东省人社厅·事业单位公开招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://hrss.gd.gov.cn/zwgk/sydwzp/",
+        "parseMode": "html",
+        "itemSelector": "ul.list > li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtSelector": "span.pubDate",
+        "allowUrlPrefixes": [
+          "https://hrss.gd.gov.cn/zwgk/sydwzp/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 15
+        }
+      },
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方",
+        "事业单位",
+        "广东"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "pku-scc",
+      "name": "北京大学就业信息网·招聘信息",
+      "kind": "json_list",
+      "config": {
+        "url": "https://scc.pku.edu.cn/f/recruitmentinfo/ajax_frontRecruitinfo?type=2&pageNo=1",
+        "mode": "json_api",
+        "method": "GET",
+        "headers": {
+          "token": "111"
+        },
+        "pageQueryParam": "pageNo",
+        "pages": 3,
+        "itemsPath": "object.list",
+        "titlePaths": [
+          "title"
+        ],
+        "urlTemplate": "https://scc.pku.edu.cn{raw:url}",
+        "publishedAtPath": "startTime",
+        "externalIdPath": "id",
+        "detailBody": {
+          "urlTemplate": "https://scc.pku.edu.cn/f/recruitmentinfo/ajax_show",
+          "method": "POST",
+          "bodyForm": {
+            "recruitmentId": "{raw:id}"
+          },
+          "dataPath": "object.recruitmentinfo",
+          "bodyPaths": [
+            "content"
+          ],
+          "maxFetches": 30
+        },
+        "_aihot": {
+          "initialBackfillLimit": 30
+        }
+      },
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方",
+        "高校就业",
+        "北京"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "sasac-rczp",
+      "name": "国务院国资委·招聘公告",
+      "kind": "web_list",
+      "config": {
+        "url": "http://www.sasac.gov.cn/n2588035/n2588325/n2588350/index.html",
+        "_aihot": {
+          "initialBackfillLimit": 15
+        },
+        "parseMode": "html",
+        "itemSelector": "span#comp_20742332 li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "http://www.sasac.gov.cn/"
+        ],
+        "publishedAtSelector": "span"
+      },
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方",
+        "央国企",
+        "央企校招"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "sh-rsj-sydw",
+      "name": "上海市人社局·事业单位公开招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://rsj.sh.gov.cn/tzpgg_17408/index.html",
+        "parseMode": "html",
+        "itemSelector": "ul.uli14 > li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtSelector": "span.time",
+        "allowUrlPrefixes": [
+          "https://rsj.sh.gov.cn/tzpgg_17408/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 15
+        }
+      },
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方",
+        "事业单位",
+        "上海"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "yn-rsj-sydw",
+      "name": "云南省人社厅·事业单位招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://hrss.yn.gov.cn/gsgg/sydwgkzp/gg/",
+        "parseMode": "html",
+        "itemSelector": "ul.list > li.list-item",
+        "linkSelector": "a.clearfix",
+        "titleSelector": ".text",
+        "publishedAtSelector": ".time",
+        "allowUrlPrefixes": [
+          "https://hrss.yn.gov.cn/gsgg/sydwgkzp/gg/"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 15,
+          "initialBackfillMonths": 12
+        }
+      },
+      "tier": "T1",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": [
+        "官方",
+        "事业单位",
+        "云南"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cicc-social",
+      "name": "中金公司·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://cicc.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "referer": "https://cicc.zhiye.com/custom/social?&hideMenu=1"
+        },
+        "bodyJson": {
+          "Category": [
+            1
+          ],
+          "CategoryId": "1",
+          "DisplayFields": [
+            "Category",
+            "Kind",
+            "LocId",
+            "Org",
+            "HeadCount",
+            "Station",
+            "EndTime",
+            "PostDate",
+            "Salary",
+            "ClassificationOne",
+            "ClassificationTwo"
+          ],
+          "PageIndex": 0,
+          "PageSize": 50,
+          "PortalId": "1bb97a43-1bb9-42c2-b5c6-19ddc82c0cb9"
+        },
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://cicc.zhiye.com/custom/socialxq?jobAdId={Id}&jc=1&hideMenu=1",
+        "publishedAtPath": "PostDate",
+        "externalIdPath": "Id",
+        "summaryPaths": [
+          "Duty"
+        ],
+        "summaryIsBody": true,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "券商",
+        "社会招聘",
+        "金融"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cmhk-social",
+      "name": "招商局集团·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://cmhk.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "referer": "https://cmhk.zhiye.com/custom/sh?hideMenu=1"
+        },
+        "bodyJson": {
+          "Category": [
+            1
+          ],
+          "DisplayFields": [
+            "Category",
+            "Kind",
+            "LocId",
+            "Org",
+            "HeadCount",
+            "Station",
+            "EndTime",
+            "PostDate",
+            "Salary",
+            "ClassificationOne",
+            "ClassificationTwo"
+          ],
+          "PageIndex": 0,
+          "PageSize": 50,
+          "PortalId": "7d"
+        },
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://cmhk.zhiye.com/custom/xq?hideAll=true&jc=1&jobAdId={Id}",
+        "publishedAtPath": "PostDate",
+        "externalIdPath": "Id",
+        "summaryPaths": [
+          "Duty"
+        ],
+        "summaryIsBody": true,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "央国企",
+        "社会招聘"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "guosen-social",
+      "name": "国信证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://guosen.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "referer": "https://guosen.zhiye.com/social/jobs"
+        },
+        "bodyJson": {
+          "PageIndex": 0,
+          "PageSize": 50,
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "SpecialType": 0,
+          "PortalId": "",
+          "DisplayFields": [
+            "Category",
+            "LocId",
+            "PostDate",
+            "ClassificationOne",
+            "ClassificationTwo"
+          ]
+        },
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://guosen.zhiye.com/social/detail?jobAdId={Id}",
+        "publishedAtPath": "PostDate",
+        "externalIdPath": "Id",
+        "summaryPaths": [
+          "Duty"
+        ],
+        "summaryIsBody": true,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": [
+        "券商",
+        "社会招聘",
+        "金融"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "ant-social",
+      "name": "蚂蚁集团·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://hrcareersweb.antgroup.com/api/social/position/search",
+        "mode": "json_api",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "referer": "https://talent.antgroup.com/off-campus"
+        },
+        "bodyJson": {
+          "key": "",
+          "regions": "",
+          "categories": "",
+          "subCategories": "",
+          "bgCode": "",
+          "socialQrCode": "",
+          "pageIndex": 1,
+          "pageSize": 30,
+          "channel": "group_official_site",
+          "language": "zh"
+        },
+        "itemsPath": "content",
+        "titlePaths": [
+          "name"
+        ],
+        "urlTemplate": "https://talent.antgroup.com/off-campus-position?positionId={id}",
+        "publishedAtPath": "publishTime",
+        "externalIdPath": "id",
+        "summaryPaths": [
+          "description"
+        ],
+        "summaryIsBody": true,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "tags": [
+        "大厂",
+        "社会招聘"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "meituan-finance",
+      "name": "美团·金融类岗位",
+      "kind": "json_list",
+      "config": {
+        "url": "https://zhaopin.meituan.com/api/official/job/getJobList",
+        "mode": "json_api",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "referer": "https://zhaopin.meituan.com/web/social?keyword=%E9%87%91%E8%9E%8D&jfJgList=11007_-1",
+          "origin": "https://zhaopin.meituan.com"
+        },
+        "bodyJson": {
+          "page": {
+            "pageNo": 1,
+            "pageSize": 20
+          },
+          "jobShareType": "1",
+          "keywords": "金融",
+          "cityList": [],
+          "department": [],
+          "jfJgList": [
+            {
+              "code": "11007",
+              "subCode": []
+            }
+          ],
+          "jobType": [
+            {
+              "code": "3",
+              "subCode": []
+            }
+          ],
+          "typeCode": [],
+          "specialCode": []
+        },
+        "itemsPath": "data.list",
+        "titlePaths": [
+          "name"
+        ],
+        "urlTemplate": "https://zhaopin.meituan.com/web/position/detail?jobUnionId={jobUnionId}&highlightType=social",
+        "publishedAtPath": "refreshTime",
+        "externalIdPath": "jobUnionId",
+        "summaryPaths": [
+          "jobDuty"
+        ],
+        "summaryIsBody": true,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "publishedAtUnit": "epoch_ms"
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "tags": [
+        "大厂",
+        "金融",
+        "社会招聘"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "xhs-social",
+      "name": "小红书·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://job.xiaohongshu.com/websiterecruit/position/pageQueryPosition",
+        "mode": "json_api",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "referer": "https://job.xiaohongshu.com/jobs"
+        },
+        "bodyJson": {
+          "positionName": "",
+          "pageNum": 1,
+          "pageSize": 50,
+          "recruitType": "social"
+        },
+        "itemsPath": "data.list",
+        "titlePaths": [
+          "positionName"
+        ],
+        "urlTemplate": "https://job.xiaohongshu.com/social/position/{positionId}",
+        "publishedAtPath": "publishTime",
+        "externalIdPath": "positionId",
+        "summaryPaths": [
+          "duty"
+        ],
+        "summaryIsBody": true,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "tags": [
+        "大厂",
+        "社会招聘"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "tencent-strategy",
+      "name": "腾讯·战略与投资类岗位",
+      "kind": "json_list",
+      "config": {
+        "url": "https://careers.tencent.com/tencentcareer/api/post/Query?countryId=&cityId=&bgIds=&productId=&categoryId=40011&parentCategoryId=&attrId=1&keyword=&pageIndex=1&pageSize=50&language=zh-cn&area=cn",
+        "mode": "json_api",
+        "method": "GET",
+        "headers": {
+          "accept": "application/json",
+          "referer": "https://careers.tencent.com/search.html?query=ot_40011,at_1"
+        },
+        "itemsPath": "Data.Posts",
+        "titlePaths": [
+          "RecruitPostName"
+        ],
+        "urlTemplate": "{raw:PostURL}",
+        "publishedAtPath": "LastUpdateTime",
+        "externalIdPath": "PostId",
+        "summaryPaths": [
+          "Responsibility"
+        ],
+        "summaryIsBody": true,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "tags": [
+        "大厂",
+        "战略投资",
+        "社会招聘"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "jdtech-social",
+      "name": "京东科技·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://zhaopin.jd.com/web/job/job_list?pageIndex=1&pageSize=100&workCityJson=%5B%5D&jobTypeJson=%5B%5D&depTypeJson=%5B%2200008987%22%5D&jobSearch=",
+        "mode": "json_api",
+        "method": "POST",
+        "headers": {
+          "referer": "https://zhaopin.jd.com/web/job/job_info_list/3"
+        },
+        "itemsPath": "",
+        "titlePaths": [
+          "positionNameOpen",
+          "positionName"
+        ],
+        "urlTemplate": "https://zhaopin.jd.com/web/job/job_info_list/3?id={raw:positionId}",
+        "publishedAtPath": "publishTime",
+        "publishedAtUnit": "epoch_ms",
+        "externalIdPath": "positionId",
+        "authorPaths": [
+          "positionDeptName"
+        ],
+        "bodyParts": [
+          "workContent",
+          "qualification"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 20
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "tags": [
+        "大厂",
+        "金融科技",
+        "社会招聘"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "boci-jobs",
+      "name": "中银国际·全部职位",
+      "kind": "json_list",
+      "config": {
+        "url": "https://au01-foc.lumessetalentlink.com/fo/rest/jobs?firstResult=0&maxResults=100&sortBy=sJobTitle&sortOrder=asc",
+        "mode": "json_api",
+        "method": "POST",
+        "headers": {
+          "content-type": "application/json",
+          "username": "Q7WFK026203F3VBQBLOV7F624:guest:FO",
+          "password": "guest",
+          "lumesse-language": "UK",
+          "origin": "https://boci.recruitmentplatform.com",
+          "referer": "https://boci.recruitmentplatform.com/"
+        },
+        "bodyJson": {
+          "searchCriteria": {}
+        },
+        "itemsPath": "jobs",
+        "titlePaths": [
+          "jobFields.jobTitle"
+        ],
+        "urlTemplate": "https://boci.recruitmentplatform.com/details.html?jobId={jobFields.id}",
+        "externalIdPath": "jobFields.id",
+        "authorPaths": [
+          "jobFields.SLOVLIST3"
+        ],
+        "bodyParts": [
+          "customFields.0.content",
+          "customFields.1.content",
+          "customFields.2.content",
+          "customFields.3.content"
+        ],
+        "_aihot": {
+          "initialBackfillLimit": 20
+        }
+      },
+      "tier": "ARCHIVE",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "券商",
+        "香港",
+        "社会招聘",
+        "校园招聘"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "htsc-social",
+      "name": "华泰证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU6013d14e5d83dc11e4a8ae4d?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU6013d14e5d83dc11e4a8ae4d/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "titlePaths": [
+          "postName"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU6013d14e5d83dc11e4a8ae4d/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "authorPaths": [
+          "company"
+        ],
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00",
+        "detailBody": {
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU6013d14e5d83dc11e4a8ae4d?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2",
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 20
+        },
+        "_aihot": {
+          "initialBackfillLimit": 15
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "tags": [
+        "券商",
+        "社会招聘"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cmschina-social",
+      "name": "招商证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU629dbc0c0dcad452299bc0f7?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 10,
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU629dbc0c0dcad452299bc0f7/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "titlePaths": [
+          "postName"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU629dbc0c0dcad452299bc0f7/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "authorPaths": [
+          "company"
+        ],
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00",
+        "detailBody": {
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU629dbc0c0dcad452299bc0f7?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2",
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 160
+        },
+        "_aihot": {
+          "initialBackfillLimit": 160,
+          "initialBackfillMonths": 12
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "tags": [
+        "券商",
+        "社会招聘"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cmschina-campus",
+      "name": "招商证券·校园招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU629dbc0c0dcad452299bc0f7?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=1&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 2,
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU629dbc0c0dcad452299bc0f7/pb/campus.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "minNumeric": {
+          "path": "projectId",
+          "min": 101500
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU629dbc0c0dcad452299bc0f7/pb/posDetail.html?postId={postId}&postType=campus",
+        "externalIdPath": "postId",
+        "authorPaths": [
+          "company"
+        ],
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00",
+        "detailBody": {
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU629dbc0c0dcad452299bc0f7?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=1",
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 30
+        },
+        "_aihot": {
+          "initialBackfillLimit": 30
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "tags": [
+        "券商",
+        "校园招聘",
+        "2027届"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "htsc-campus",
+      "name": "华泰证券·校园招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU6013d14e5d83dc11e4a8ae4d?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=1&pageSize=50&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU6013d14e5d83dc11e4a8ae4d/pb/campus.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "titlePaths": [
+          "postName"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU6013d14e5d83dc11e4a8ae4d/pb/posDetail.html?postId={postId}&postType=campus",
+        "externalIdPath": "postId",
+        "authorPaths": [
+          "company"
+        ],
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00",
+        "detailBody": {
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU6013d14e5d83dc11e4a8ae4d?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=1",
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 120
+        },
+        "_aihot": {
+          "initialBackfillLimit": 120,
+          "initialBackfillMonths": 12
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 240,
+      "tags": [
+        "券商",
+        "校园招聘",
+        "2027届"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "mihoyo-campus",
+      "name": "米哈游·校园招聘与实习",
+      "kind": "json_list",
+      "config": {
+        "url": "https://ats.openout.mihoyo.com/ats-portal/v1/job/list",
+        "mode": "json_api",
+        "method": "POST",
+        "headers": {
+          "accept": "application/json",
+          "content-type": "application/json",
+          "origin": "https://jobs.mihoyo.com",
+          "referer": "https://jobs.mihoyo.com/",
+          "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/140.0.0.0 Safari/537.36"
+        },
+        "bodyJson": {
+          "pageNo": 1,
+          "pageSize": 100,
+          "channelDetailIds": [
+            1
+          ],
+          "hireType": 1
+        },
+        "pageBodyPath": "pageNo",
+        "pages": 3,
+        "itemsPath": "data.list",
+        "titlePaths": [
+          "title"
+        ],
+        "urlTemplate": "https://jobs.mihoyo.com/#/campus/position/{raw:id}",
+        "preserveUrlFragment": true,
+        "externalIdPath": "id",
+        "authorPaths": [
+          "projectName"
+        ],
+        "detailBody": {
+          "urlTemplate": "https://ats.openout.mihoyo.com/ats-portal/v1/job/info",
+          "method": "POST",
+          "bodyJson": {
+            "id": "{raw:id}",
+            "channelDetailIds": [
+              1
+            ],
+            "hireType": 1
+          },
+          "dataPath": "data",
+          "bodyPaths": [
+            "description",
+            "jobRequire",
+            "addition"
+          ],
+          "maxFetches": 260
+        },
+        "_aihot": {
+          "initialBackfillLimit": 260
+        }
+      },
+      "tier": "ARCHIVE",
+      "owner_entity_id": null,
+      "participation_mode": "editorial",
+      "interval_minutes": 720,
+      "tags": [
+        "游戏",
+        "校园招聘",
+        "实习"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cms-bocichina",
+      "name": "中银证券·社会招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://bocichina.zhiye.com/social/jobs",
+        "_aihot": {
+          "initialBackfillLimit": 15
+        },
+        "baseUrl": "https://bocichina.zhiye.com",
+        "parseMode": "html",
+        "itemSelector": "table.listtable tr, table.jobsTable tr",
+        "linkSelector": "a[href*='/zpdetail/']",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://bocichina.zhiye.com/zpdetail/"
+        ],
+        "publishedAtSelector": "td:nth-child(4)",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cms-chinaamc",
+      "name": "华夏基金·社会招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://chinaamc.zhiye.com/social/jobs",
+        "_aihot": {
+          "initialBackfillLimit": 15
+        },
+        "baseUrl": "https://chinaamc.zhiye.com",
+        "parseMode": "html",
+        "itemSelector": "table.listtable tr, table.jobsTable tr",
+        "linkSelector": "a[href*='/zpdetail/']",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://chinaamc.zhiye.com/zpdetail/"
+        ],
+        "publishedAtSelector": "td:nth-child(4)",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "基金公司"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cms-crsec",
+      "name": "国新证券·社会招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://crsec.zhiye.com/social/jobs",
+        "_aihot": {
+          "initialBackfillLimit": 15
+        },
+        "baseUrl": "https://crsec.zhiye.com",
+        "parseMode": "html",
+        "itemSelector": "table.listtable tr, table.jobsTable tr",
+        "linkSelector": "a[href*='/zpdetail/']",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://crsec.zhiye.com/zpdetail/"
+        ],
+        "publishedAtSelector": "td:nth-child(4)",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cms-guodu",
+      "name": "国都证券·社会招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://guodu.zhiye.com/social/jobs",
+        "_aihot": {
+          "initialBackfillLimit": 15
+        },
+        "baseUrl": "https://guodu.zhiye.com",
+        "parseMode": "html",
+        "itemSelector": "table.listtable tr, table.jobsTable tr",
+        "linkSelector": "a[href*='/zpdetail/']",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://guodu.zhiye.com/zpdetail/"
+        ],
+        "publishedAtSelector": "td:nth-child(4)",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cms-invescogreatwall",
+      "name": "景顺长城基金·社会招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://invescogreatwall.zhiye.com/social/jobs",
+        "_aihot": {
+          "initialBackfillLimit": 15
+        },
+        "baseUrl": "https://invescogreatwall.zhiye.com",
+        "parseMode": "html",
+        "itemSelector": "table.listtable tr, table.jobsTable tr",
+        "linkSelector": "a[href*='/zpdetail/']",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://invescogreatwall.zhiye.com/zpdetail/"
+        ],
+        "publishedAtSelector": "td:nth-child(4)",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "基金公司"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cms-jictrust",
+      "name": "中建投信托·社会招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://jictrust.zhiye.com/social/jobs",
+        "_aihot": {
+          "initialBackfillLimit": 15
+        },
+        "baseUrl": "https://jictrust.zhiye.com",
+        "parseMode": "html",
+        "itemSelector": "table.listtable tr, table.jobsTable tr",
+        "linkSelector": "a[href*='/zpdetail/']",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://jictrust.zhiye.com/zpdetail/"
+        ],
+        "publishedAtSelector": "td:nth-child(4)",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cms-nci",
+      "name": "新华保险·社会招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://nci.zhiye.com/social/jobs",
+        "_aihot": {
+          "initialBackfillLimit": 15
+        },
+        "baseUrl": "https://nci.zhiye.com",
+        "parseMode": "html",
+        "itemSelector": "table.listtable tr, table.jobsTable tr",
+        "linkSelector": "a[href*='/zpdetail/']",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://nci.zhiye.com/zpdetail/"
+        ],
+        "publishedAtSelector": "td:nth-child(4)",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cms-sczq",
+      "name": "首创证券·社会招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://sczq.zhiye.com/social/jobs",
+        "_aihot": {
+          "initialBackfillLimit": 15
+        },
+        "baseUrl": "https://sczq.zhiye.com",
+        "parseMode": "html",
+        "itemSelector": "table.listtable tr, table.jobsTable tr",
+        "linkSelector": "a[href*='/zpdetail/']",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://sczq.zhiye.com/zpdetail/"
+        ],
+        "publishedAtSelector": "td:nth-child(4)",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "cms-xib",
+      "name": "厦门国际银行·社会招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://xib.zhiye.com/social/jobs",
+        "_aihot": {
+          "initialBackfillLimit": 15
+        },
+        "baseUrl": "https://xib.zhiye.com",
+        "parseMode": "html",
+        "itemSelector": "table.listtable tr, table.jobsTable tr",
+        "linkSelector": "a[href*='/zpdetail/']",
+        "titleSelector": "a",
+        "allowUrlPrefixes": [
+          "https://xib.zhiye.com/zpdetail/"
+        ],
+        "publishedAtSelector": "td:nth-child(4)",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-601ce262",
+      "name": "深圳农商银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU601ce262bef57c66a91d41fa?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU601ce262bef57c66a91d41fa/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU601ce262bef57c66a91d41fa?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU601ce262bef57c66a91d41fa/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-610b91ee",
+      "name": "中化资本·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU610b91ee0dcad4106ff11c21?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU610b91ee0dcad4106ff11c21/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU610b91ee0dcad4106ff11c21?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU610b91ee0dcad4106ff11c21/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "其他金融"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-6114cab4",
+      "name": "天风证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU6114cab40dcad4106ffc953b?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU6114cab40dcad4106ffc953b/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU6114cab40dcad4106ffc953b?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU6114cab40dcad4106ffc953b/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-6138665d",
+      "name": "南方基金·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU6138665dbef57c3b63841399?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU6138665dbef57c3b63841399/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU6138665dbef57c3b63841399?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU6138665dbef57c3b63841399/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "基金公司"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-614049ae",
+      "name": "西部证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU614049aebef57c3b638d207c?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU614049aebef57c3b638d207c/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU614049aebef57c3b638d207c?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU614049aebef57c3b638d207c/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-618ca973",
+      "name": "中国银河金控·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU618ca9732f9d242b12d420a7?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU618ca9732f9d242b12d420a7/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU618ca9732f9d242b12d420a7?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU618ca9732f9d242b12d420a7/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-61d3efea",
+      "name": "西南证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU61d3efeabef57c13bcba2eea?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU61d3efeabef57c13bcba2eea/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU61d3efeabef57c13bcba2eea?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU61d3efeabef57c13bcba2eea/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-625527c3",
+      "name": "广发证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU625527c30dcad4021443cdda?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU625527c30dcad4021443cdda/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU625527c30dcad4021443cdda?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU625527c30dcad4021443cdda/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-625d4a0b",
+      "name": "国投证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU625d4a0b2f9d24287db127c8?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU625d4a0b2f9d24287db127c8/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU625d4a0b2f9d24287db127c8?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU625d4a0b2f9d24287db127c8/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-629dbc26",
+      "name": "招商致远资本·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU629dbc260dcad452299bc0fa?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU629dbc260dcad452299bc0fa/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU629dbc260dcad452299bc0fa?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU629dbc260dcad452299bc0fa/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-62bd501c",
+      "name": "中泰证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU62bd501c0dcad406d143caea?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU62bd501c0dcad406d143caea/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU62bd501c0dcad406d143caea?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU62bd501c0dcad406d143caea/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-62e0f5dd",
+      "name": "联储证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU62e0f5dd0dcad44de6f2662a?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU62e0f5dd0dcad44de6f2662a/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU62e0f5dd0dcad44de6f2662a?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU62e0f5dd0dcad44de6f2662a/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-62f37858",
+      "name": "五矿证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU62f37858bef57c29ead8adab?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU62f37858bef57c29ead8adab/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU62f37858bef57c29ead8adab?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU62f37858bef57c29ead8adab/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-63172240",
+      "name": "广州金控·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU631722400dcad45d8178a329?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU631722400dcad45d8178a329/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU631722400dcad45d8178a329?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU631722400dcad45d8178a329/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "其他金融"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-64368f5c",
+      "name": "国海证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU64368f5c2f9d245a5ba3b479?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU64368f5c2f9d245a5ba3b479/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU64368f5c2f9d245a5ba3b479?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU64368f5c2f9d245a5ba3b479/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-645b0d18",
+      "name": "华夏银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU645b0d18bef57c0907e9fbc8?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU645b0d18bef57c0907e9fbc8/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU645b0d18bef57c0907e9fbc8?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU645b0d18bef57c0907e9fbc8/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-64f952b4",
+      "name": "郑州银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU64f952b41eb8051fabaed066?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU64f952b41eb8051fabaed066/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU64f952b41eb8051fabaed066?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU64f952b41eb8051fabaed066/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-64faea1b",
+      "name": "九江银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU64faea1b1c240e4e45d27d61?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU64faea1b1c240e4e45d27d61/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU64faea1b1c240e4e45d27d61?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU64faea1b1c240e4e45d27d61/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-65323a7d",
+      "name": "广州银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU65323a7d8ac1ca5869a66c80?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU65323a7d8ac1ca5869a66c80/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU65323a7d8ac1ca5869a66c80?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU65323a7d8ac1ca5869a66c80/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-6562fec7",
+      "name": "江海证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU6562fec76202cc6e3ae4cdf5?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU6562fec76202cc6e3ae4cdf5/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU6562fec76202cc6e3ae4cdf5?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU6562fec76202cc6e3ae4cdf5/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-65f1667e",
+      "name": "银河基金·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU65f1667e1eb80541009b3e5c?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU65f1667e1eb80541009b3e5c/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU65f1667e1eb80541009b3e5c?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU65f1667e1eb80541009b3e5c/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "基金公司"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-65f94024",
+      "name": "博时基金·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU65f940241c240e0a2275bda8?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU65f940241c240e0a2275bda8/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU65f940241c240e0a2275bda8?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU65f940241c240e0a2275bda8/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "基金公司"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-67ac6886",
+      "name": "易方达基金·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU67ac68866202cc7916aea66e?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU67ac68866202cc7916aea66e/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU67ac68866202cc7916aea66e?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU67ac68866202cc7916aea66e/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "基金公司"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "hotjob-68ac19f8",
+      "name": "爱建证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPosition/SU68ac19f8b8fdf84cde4e6925?iSaJAx=isAjax&request_locale=zh_CN&isFrompb=true&recruitType=2&pageSize=15&currentPage=1",
+        "mode": "json_api",
+        "pages": 3,
+        "_aihot": {
+          "initialBackfillLimit": 20
+        },
+        "headers": {
+          "referer": "https://wecruit.hotjob.cn/SU68ac19f8b8fdf84cde4e6925/pb/social.html"
+        },
+        "itemsPath": "data.pageForm.pageData",
+        "detailBody": {
+          "dataPath": "data",
+          "bodyPaths": [
+            "workContent",
+            "serviceCondition"
+          ],
+          "maxFetches": 15,
+          "urlTemplate": "https://wecruit.hotjob.cn/wecruit/positionInfo/listPositionDetail/SU68ac19f8b8fdf84cde4e6925?iSaJAx=isAjax&request_locale=zh_CN&postId={postId}&recruitType=2"
+        },
+        "titlePaths": [
+          "postName"
+        ],
+        "authorPaths": [
+          "company"
+        ],
+        "urlTemplate": "https://wecruit.hotjob.cn/SU68ac19f8b8fdf84cde4e6925/pb/posDetail.html?postId={postId}&postType=society",
+        "externalIdPath": "postId",
+        "publishedAtPath": "publishDate",
+        "publishedAtUtcOffset": "+08:00"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-apiins",
+      "name": "亚太财险·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://apiins.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://apiins.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://apiins.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-bankofbeijing",
+      "name": "北京银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://bankofbeijing.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://bankofbeijing.zhiye.com/custom/social?hideMenu=1",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://bankofbeijing.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-bankofbeijingwealth",
+      "name": "北银理财·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://bankofbeijingwealth.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://bankofbeijingwealth.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://bankofbeijingwealth.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-bdochina",
+      "name": "立信会计师事务所·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://bdochina.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://bdochina.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://bdochina.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "咨询"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-bocd",
+      "name": "成都银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://bocd.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://bocd.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://bocd.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-bosc",
+      "name": "上海银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://bosc.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://bosc.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://bosc.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-ceecoic",
+      "name": "中能建海外·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://ceecoic.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://ceecoic.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://ceecoic.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "其他金融"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-cfsc",
+      "name": "华鑫证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://cfsc.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://cfsc.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://cfsc.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-cgws1",
+      "name": "长城证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://cgws1.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://cgws1.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://cgws1.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-chinalife",
+      "name": "中国人寿集团·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://chinalife.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://chinalife.zhiye.com/custom/social?hideMenu=1",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://chinalife.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-chinastock",
+      "name": "银河证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://chinastock.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://chinastock.zhiye.com/custom/social",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://chinastock.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-cinda",
+      "name": "中国信达·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://cinda.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://cinda.zhiye.com/",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://cinda.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "其他金融"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-cmfchina",
+      "name": "招商基金·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://cmfchina.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://cmfchina.zhiye.com/social/jobs?queryId=b65de06f-7192-4152-a2ee-1889437fd1c1",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://cmfchina.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "基金公司"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-cntp",
+      "name": "中国太平·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://cntp.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://cntp.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://cntp.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-coamc",
+      "name": "中国东方资产·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://coamc.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://coamc.zhiye.com/custom/social?hideMenu=1",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://coamc.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-csc108",
+      "name": "中信建投·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://csc108.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://csc108.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://csc108.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-cscb",
+      "name": "长沙银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://cscb.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://cscb.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://cscb.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-cxmt",
+      "name": "长鑫科技·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://cxmt.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://cxmt.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://cxmt.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "其他金融"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-dongguanbank",
+      "name": "东莞银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://dongguanbank.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://dongguanbank.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://dongguanbank.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-dreame",
+      "name": "追觅·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://dreame.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://dreame.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://dreame.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "其他金融"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-dwzq",
+      "name": "东吴证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://dwzq.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://dwzq.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://dwzq.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-ebscn",
+      "name": "光大证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://ebscn.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://ebscn.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://ebscn.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-famc",
+      "name": "中信金融资产·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://famc.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://famc.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://famc.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-foresealife",
+      "name": "前海人寿·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://foresealife.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://foresealife.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://foresealife.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-fortunevc",
+      "name": "达晨·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://fortunevc.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://fortunevc.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://fortunevc.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-foundersc",
+      "name": "方正证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://foundersc.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://foundersc.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://foundersc.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-glsc",
+      "name": "国联民生证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://glsc.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://glsc.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://glsc.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-grantthornton",
+      "name": "致同会计师事务所招聘·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://grantthornton.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://grantthornton.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://grantthornton.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "咨询"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-gtfund",
+      "name": "国泰基金·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://gtfund.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://gtfund.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://gtfund.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "基金公司"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-gyzq",
+      "name": "国元证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://gyzq.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://gyzq.zhiye.com/jobs?queryId=93ff9f56-fdc6-47f5-817b-471a3d671a78",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://gyzq.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-haierfinancial",
+      "name": "海尔产业金融·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://haierfinancial.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://haierfinancial.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://haierfinancial.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "其他金融"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-jobtaikang",
+      "name": "泰康资产·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://jobtaikang.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://jobtaikang.zhiye.com/custom/zcshehui?hideAll=true",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://jobtaikang.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-nesc",
+      "name": "东北证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://nesc.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://nesc.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://nesc.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-njzq",
+      "name": "南京证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://njzq.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://njzq.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://njzq.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "证券"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-nomuraoi-sec",
+      "name": "野村东方国际证券·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://nomuraoi-sec.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://nomuraoi-sec.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://nomuraoi-sec.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "外资投行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-picc",
+      "name": "中国人保·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://picc.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://picc.zhiye.com/custom/social?hideAll=true&ky=&c1=&c2=&d=&c=",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://picc.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "资管"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-qhkyfund",
+      "name": "前海开源基金·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://qhkyfund.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://qhkyfund.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://qhkyfund.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "基金公司"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-smbccn",
+      "name": "三井住友银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://smbccn.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://smbccn.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://smbccn.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "外资投行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-suzhoubank",
+      "name": "苏州银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://suzhoubank.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://suzhoubank.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://suzhoubank.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-tzcpa",
+      "name": "天职国际会计师事务所·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://tzcpa.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://tzcpa.zhiye.com/social",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://tzcpa.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "咨询"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-wjasset",
+      "name": "万家基金·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://wjasset.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://wjasset.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://wjasset.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "基金公司"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-xiangyu",
+      "name": "象屿集团·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://xiangyu.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://xiangyu.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://xiangyu.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "其他金融"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-ymtc",
+      "name": "长江存储·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://ymtc.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://ymtc.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://ymtc.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "其他金融"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-zhcpa",
+      "name": "中汇·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://zhcpa.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://zhcpa.zhiye.com/intern/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://zhcpa.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "咨询"
+      ],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "zhiye-zjtlcb",
+      "name": "泰隆银行·社会招聘",
+      "kind": "json_list",
+      "config": {
+        "url": "https://zjtlcb.zhiye.com/api/Jobad/GetJobAdPageList",
+        "mode": "json_api",
+        "_aihot": {
+          "initialBackfillLimit": 50
+        },
+        "method": "POST",
+        "headers": {
+          "referer": "https://zjtlcb.zhiye.com/social/jobs",
+          "content-type": "application/json"
+        },
+        "bodyJson": {
+          "Category": [
+            "1"
+          ],
+          "KeyWords": "",
+          "PageSize": 50,
+          "PageIndex": 0,
+          "SpecialType": 0
+        },
+        "bodyParts": [
+          "Duty",
+          "Require"
+        ],
+        "itemsPath": "Data",
+        "titlePaths": [
+          "JobAdName"
+        ],
+        "urlTemplate": "https://zjtlcb.zhiye.com/social/detail?jobAdId={Id}",
+        "externalIdPath": "Id"
+      },
+      "tier": "ARCHIVE",
+      "participation_mode": "editorial",
+      "interval_minutes": 360,
+      "tags": [
+        "金融",
+        "社会招聘",
+        "银行"
+      ],
       "site_fulltext": false,
       "syndicate_fulltext": false
     }

@@ -1,12 +1,14 @@
 # One image for every role: setup (migrations and seed), api, worker and web.
 # Build arg NPM_REGISTRY switches the npm registry (e.g. https://registry.npmmirror.com in mainland China).
+# Build arg APT_MIRROR replaces deb.debian.org when that host is unreachable (e.g. mirrors.aliyun.com).
 FROM node:24-trixie-slim AS base
 WORKDIR /app
+ARG APT_MIRROR=
 # pg_dump for the optional database backups (Debian's client matches the PostgreSQL 17 server in compose).
-RUN apt-get update \
+RUN if [ -n "$APT_MIRROR" ]; then sed -i "s|deb.debian.org|$APT_MIRROR|g" /etc/apt/sources.list.d/debian.sources; fi \
+ && apt-get update \
  && apt-get install -y --no-install-recommends postgresql-client ca-certificates \
  && rm -rf /var/lib/apt/lists/*
-
 FROM base AS build
 ARG NPM_REGISTRY=
 COPY package.json package-lock.json ./

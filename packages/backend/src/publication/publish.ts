@@ -298,8 +298,10 @@ export async function publishArticleTx(tx: Tx, articleId: string, options: Publi
 
   // An undated archive has a readable detail page, but its discovery is not a news timestamp.
   // Explicit imports can retain an editorial decision already published elsewhere.
+  // An ARCHIVE source has no publish date to archive against at all (it never becomes 精选): its whole
+  // material is the archive, so it is listed in /all at discovery time.
   const eligible = isPoolEligible({ participationMode: source.participation_mode, relevance, title, summary, originalPost: !!original })
-    && (!article.backfill || article.published_at !== null || !!options.releasedAt);
+    && (!article.backfill || article.published_at !== null || !!options.releasedAt || source.tier === "ARCHIVE");
   const selectionCandidate = isSelectable(eligible, judgedSelected, source.tier);
   // Scoring nominates a report; a completed identity/value decision admits it to selection.
   // A historical import already has its public decision. Preserve that confirmed state on rebuild.
