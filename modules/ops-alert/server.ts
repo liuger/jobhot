@@ -34,27 +34,27 @@ async function sendMail(subject: string, text: string, html?: string): Promise<v
   await mailer.sendMail({ from: `${SITE.name}运维 <${cfg.user}>`, to: cfg.to, subject, text, ...(html ? { html } : {}) });
 }
 
-/** 运维邮件的古籍风外壳：tone 用 "zhu"（告警，朱丝栏+朱印）或 "qing"（心跳，竹青报头+青印）。 */
+/** 运维邮件的外壳：tone 用 "zhu"（告警，红色报头）或 "qing"（心跳，藏青报头）。 */
 function opsEmail(title: string, bodyHtml: string, tone: "zhu" | "qing"): string {
-  const band = tone === "zhu" ? "#a83f39" : "#5f7f4e";
-  const rule = tone === "zhu" ? "#c96f66" : "#5f7f4e";
-  const ruleSoft = tone === "zhu" ? "#dea39b" : "#a9c9a0";
-  const seal = tone === "zhu" ? "砚" : "青";
-  return `<div style="background:#efe9d7;padding:24px 10px;font-family:system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;">
+  const band = tone === "zhu" ? "#d63022" : "#16203c";
+  const rule = tone === "zhu" ? "#e8a49e" : "#aeb8d2";
+  const ruleSoft = tone === "zhu" ? "#f3cdc9" : "#d6dcea";
+  const seal = tone === "zhu" ? "警" : "常";
+  return `<div style="background:#f2f3f5;padding:24px 10px;font-family:system-ui,-apple-system,'Segoe UI','PingFang SC','Microsoft YaHei',sans-serif;">
   <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 auto;">
     <tr><td>
       <div style="background:${band};border-radius:6px 6px 0 0;padding:14px 24px;">
-        <span style="font-family:'Kaiti SC','STKaiti',KaiTi,serif;font-size:19px;font-weight:700;color:#fdfaf1;letter-spacing:6px;">${title}</span>
-        <span style="float:right;color:rgba(253,250,241,0.75);font-size:12px;padding-top:6px;">${new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" })}</span>
+        <span style="font-size:18px;font-weight:700;color:#fbf8f1;letter-spacing:2px;">${title}</span>
+        <span style="float:right;color:rgba(251,248,241,0.75);font-size:12px;padding-top:6px;">${new Date().toLocaleString("zh-CN", { timeZone: "Asia/Shanghai" })}</span>
       </div>
-      <div style="background:#fbf7ec;border:1.5px solid ${rule};border-top:none;padding:20px 24px;">
+      <div style="background:#ffffff;border:1px solid #e3e6ec;border-top:none;padding:20px 24px;">
         <div style="border:1px solid ${ruleSoft};padding:14px 18px;">
-          <div style="font-size:13.5px;color:#23221d;line-height:2.0;">${bodyHtml}</div>
+          <div style="font-size:13.5px;color:#1c2333;line-height:2.0;">${bodyHtml}</div>
         </div>
         <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="margin-top:14px;">
           <tr>
-            <td style="font-size:12px;color:#8b8577;font-family:'Kaiti SC','STKaiti',KaiTi,serif;letter-spacing:2px;">青砚运维 · ${tone === "zhu" ? "见字如面" : "研墨于此"}</td>
-            <td align="right"><span style="display:inline-block;background:${band};color:#fdf8ec;padding:4px 8px;border-radius:3px;font-family:'Kaiti SC','STKaiti',KaiTi,serif;font-size:12px;font-weight:700;">${seal}</span></td>
+            <td style="font-size:12px;color:#8a92a3;letter-spacing:1px;">${SITE.name} 运维 · ${tone === "zhu" ? "需要处理" : "例行汇报"}</td>
+            <td align="right"><span style="display:inline-block;background:${band};color:#fbf8f1;padding:4px 8px;border-radius:3px;font-size:12px;font-weight:700;">${seal}</span></td>
           </tr>
         </table>
       </div>

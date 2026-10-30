@@ -1,5 +1,5 @@
 // 站点的字标、圆环标记和朱砂印：页面用 Wordmark 画站名（size 是高度，单位像素），RingMark 是小标记，
-// 转起来就是加载动画，Seal 是「砚」字朱砂印，用在报头落款等处。
+// 转起来就是加载动画，Seal 是「招」字朱砂印，用在报头落款等处。
 // Wordmark 已换成正式 Logo：岗位卡片标记（LogoMark）+ 站名，导航侧栏、手机顶栏、后台登录页共用；
 // 文字颜色随 currentColor 走，明暗两种主题都正常。
 import { useId } from "react";
@@ -36,7 +36,7 @@ export function RingMark({ className = "", spinning = false }: { className?: str
   );
 }
 
-/** 「砚」字朱砂印：红底白字、微微歪斜，像钤在纸上的印。 */
+/** 「招」字朱砂印：红底白字、微微歪斜，像钤在纸上的印。 */
 export function Seal({ size = 28, className = "" }: { size?: number; className?: string }) {
   return (
     <span
@@ -44,7 +44,7 @@ export function Seal({ size = 28, className = "" }: { size?: number; className?:
       style={{ width: size, height: size, fontSize: Math.round(size * 0.56), background: "var(--hot)", transform: "rotate(-2.5deg)" }}
       aria-hidden="true"
     >
-      砚
+      招
     </span>
   );
 }

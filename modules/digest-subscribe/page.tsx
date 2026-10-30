@@ -1,4 +1,4 @@
-// /digest：读者订阅每日环保日报的页面。
+// /digest：读者订阅求职日报邮件的页面。
 import { useState } from "react";
 import { SITE } from "@aihot/site";
 
@@ -28,24 +28,22 @@ export default function DigestPage() {
 
   return (
     <main className="mx-auto max-w-xl px-5 py-14">
-      {/* 报头：楷体标题 + 竹青底线，似古籍题签 */}
       <div className="border-b-[3px] border-accent pb-4">
-        <h1 className="font-kai text-[30px] font-bold tracking-[0.08em] text-ink">
+        <h1 className="text-[26px] font-bold tracking-[0.02em] text-ink">
           邮件订阅<span className="text-accent"> · </span>{SITE.subject}日报
         </h1>
-        <p className="mt-2 font-kai text-[13px] tracking-[0.3em] text-ink-4">研环保之墨 · 见行业之先</p>
+        <p className="mt-2 text-[13px] text-ink-4">{SITE.tagline}</p>
       </div>
 
-      {/* 朱丝栏内容格 */}
-      <div className="relative mt-6 rounded-[4px] border-[1.5px] border-[var(--zhu-rule)] p-5 outline outline-1 outline-offset-[3px] outline-[var(--zhu-rule-soft)]">
+      <div className="mt-6 rounded-lg border border-line bg-surface p-5">
         <p className="text-[14.5px] leading-[1.9] text-ink-2">
-          每天早上 <span className="font-semibold text-accent-ink">08:10</span>，把当日环保与双碳要闻——
-          <span className="text-ink">政策、标准、处罚、名单、督察</span>——汇总成一封古籍样式的邮件发给你。
+          每天早上 08:00 出刊后，把当天还在报名的岗位——
+          <span className="text-ink">央国企校招、事业单位、留学生专场、ESG 双碳、日常实习</span>——汇总成一封邮件发给你。
           先发确认邮件到你的邮箱，点击其中的链接即完成订阅；邮件尾部随时可退订。
         </p>
         {state === "sent" ? (
           <div className="mt-5 rounded-lg border border-accent/30 bg-accent-soft px-4 py-3 text-[14px] text-accent-ink">
-            确认邮件已钤印发出——请到你的邮箱（含垃圾邮件夹）点击「确认订阅」。
+            确认邮件已发出——请到你的邮箱（含垃圾邮件夹）点击「确认订阅」。
           </div>
         ) : (
           <form onSubmit={submit} className="mt-5 flex gap-3">
@@ -55,14 +53,14 @@ export default function DigestPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="你的邮箱地址"
-              className="min-w-0 flex-1 rounded-lg border border-line bg-surface px-4 py-2.5 text-[15px] text-ink outline-none focus:border-accent"
+              className="min-w-0 flex-1 rounded-lg border border-line bg-bg px-4 py-2.5 text-[15px] text-ink outline-none focus:border-accent"
             />
             <button
               type="submit"
               disabled={state === "sending"}
-              className="shrink-0 rounded-lg bg-accent px-6 py-2.5 font-kai text-[15px] font-bold text-accent-contrast disabled:opacity-60"
+              className="shrink-0 rounded-lg bg-accent px-6 py-2.5 text-[15px] font-bold text-accent-contrast disabled:opacity-60"
             >
-              {state === "sending" ? "呈递中…" : "订 阅"}
+              {state === "sending" ? "发送中…" : "订 阅"}
             </button>
           </form>
         )}
@@ -70,8 +68,8 @@ export default function DigestPage() {
       </div>
 
       <p className="mt-6 text-[12.5px] leading-[1.8] text-ink-4">
-        更适合程序员的姿势：日报同样提供 <a href="/agent" className="text-accent hover:underline">RSS 与 API</a>；
-        新标准发布还可在 <a href="/standards" className="text-accent hover:underline">标准倒计时</a> 页追踪施行日期。
+        赶时间也可以直接看<a href="/deadline" className="text-accent hover:underline">报名截止</a>页，按剩余天数排好；
+        日报同样提供 <a href="/agent" className="text-accent hover:underline">RSS 与 API</a>。
       </p>
     </main>
   );

@@ -139,26 +139,32 @@ export default function ChangelogPage() {
     months.set(date.slice(0, 7), month);
   }
 
+  // Only kinds actually in use get a filter entry; the card itself needs at least two to be worth showing.
+  const activeKinds = KINDS.filter((k) => data.releases.some((r) => r.kind === k));
+
   const aside = (
     <>
-      <AsideCard title="按类型看" className="hidden lg:block">
-        <div className="-mx-2 -mb-1">
-          {[null, ...KINDS].map((k) => (
-            <button
-              key={k ?? "all"}
-              type="button"
-              onClick={() => setKind(k)}
-              aria-pressed={kind === k}
-              className={`flex w-full items-center gap-2.5 rounded-control px-2 py-2 text-left text-[13.5px] transition-colors ${kind === k ? "bg-bg-sunk font-medium text-ink dark:bg-bg-muted/60" : "text-ink-2 hover:bg-bg-sunk hover:text-ink"}`}
-            >
-              <span className={`size-1.5 rounded-full ${k ? KIND_DOT[k] : "bg-ink-2"}`} aria-hidden="true" />
-              <span className="flex-1">{k ?? "全部"}</span>
-              <span className="num text-[12px] text-ink-4">{k ? data.releases.filter((r) => r.kind === k).length : data.releases.length}</span>
-            </button>
-          ))}
-        </div>
-      </AsideCard>
-      <AsideCard title="按月份" className="hidden lg:block">
+      {activeKinds.length > 1 && (
+        <AsideCard title="按类型看" className="hidden lg:block">
+          <div className="-mx-2 -mb-1">
+            {[null, ...activeKinds].map((k) => (
+              <button
+                key={k ?? "all"}
+                type="button"
+                onClick={() => setKind(k)}
+                aria-pressed={kind === k}
+                className={`flex w-full items-center gap-2.5 rounded-control px-2 py-2 text-left text-[13.5px] transition-colors ${kind === k ? "bg-bg-sunk font-medium text-ink dark:bg-bg-muted/60" : "text-ink-2 hover:bg-bg-sunk hover:text-ink"}`}
+              >
+                <span className={`size-1.5 rounded-full ${k ? KIND_DOT[k] : "bg-ink-2"}`} aria-hidden="true" />
+                <span className="flex-1">{k ?? "全部"}</span>
+                <span className="num text-[12px] text-ink-4">{k ? data.releases.filter((r) => r.kind === k).length : data.releases.length}</span>
+              </button>
+            ))}
+          </div>
+        </AsideCard>
+      )}
+      {months.size > 1 && (
+        <AsideCard title="按月份" className="hidden lg:block">
         <nav aria-label="按月份" className="-mx-2 -mb-1">
           {[...months.entries()].map(([month, m]) => {
             const [y, mo] = month.split("-").map(Number) as [number, number];
@@ -169,7 +175,8 @@ export default function ChangelogPage() {
             );
           })}
         </nav>
-      </AsideCard>
+        </AsideCard>
+      )}
       <AsideCard title="有想法或遇到问题">
         <p className="text-[13px] leading-[1.75] text-ink-3">想要的功能、用着不顺的地方，都可以在反馈页告诉我们。</p>
         <IntentLink viewTransition to="/feedback" className="mt-3 inline-flex items-center gap-1 text-[13px] font-medium text-accent hover:underline">
