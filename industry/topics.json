@@ -1,0 +1,547 @@
+{
+  "groups": [
+    {
+      "key": "track",
+      "name": "赛道与季节",
+      "blurb": "秋招、春招、暑期实习、提前批、补录——按时间节奏挑"
+    },
+    {
+      "key": "stage",
+      "name": "届别",
+      "blurb": "2027 届、2026 届还是不限届别，先看清自己是哪一届"
+    },
+    {
+      "key": "employer",
+      "name": "重点雇主",
+      "blurb": "国网、中石油、中移动、四大……按雇主追踪招聘节奏"
+    },
+    {
+      "key": "province",
+      "name": "工作地区",
+      "blurb": "按工作地点看当地还在报名的岗位"
+    }
+  ],
+  "topics": [
+    {
+      "slug": "t-qiuzhao",
+      "name": "秋招",
+      "tags": [
+        "秋招"
+      ],
+      "definition": "秋季校园招聘：每年 8 到 11 月的主战场，央国企、事业单位与各类企业的正式岗集中开放。",
+      "group": "track"
+    },
+    {
+      "slug": "t-chunzhao",
+      "name": "春招",
+      "tags": [
+        "春招"
+      ],
+      "definition": "春季招聘：补招与二次开放，多为秋招未招满的岗位和中小规模招聘。",
+      "group": "track"
+    },
+    {
+      "slug": "t-shuqi",
+      "name": "暑期实习",
+      "tags": [
+        "暑期实习"
+      ],
+      "definition": "暑期实习与实习转正通道：在校生提前锁定毕业去向的主要路径。",
+      "group": "track"
+    },
+    {
+      "slug": "t-tiqianpi",
+      "name": "提前批",
+      "tags": [
+        "提前批"
+      ],
+      "definition": "提前批招聘：早于正式秋招启动的一批，通常流程更快、名额更少。",
+      "group": "track"
+    },
+    {
+      "slug": "t-bulu",
+      "name": "补录与递补",
+      "tags": [
+        "补录"
+      ],
+      "definition": "补录、递补与二次招聘：上一批没招满或有人放弃后放出的机会。",
+      "group": "track"
+    },
+    {
+      "slug": "t-zhengshi",
+      "name": "有编制的岗",
+      "tags": [
+        "有编制"
+      ],
+      "definition": "明确写有编制的事业单位与机关岗位，含选调生、公务员与事业单位公开招聘。",
+      "group": "track"
+    },
+    {
+      "slug": "s-2027",
+      "name": "2027 届",
+      "group": "stage",
+      "tags": [
+        "2027届"
+      ],
+      "definition": "面向 2027 届毕业生的招聘信息，含 2026 年秋招与 2027 年春招。"
+    },
+    {
+      "slug": "s-2026",
+      "name": "2026 届",
+      "group": "stage",
+      "tags": [
+        "2026届"
+      ],
+      "definition": "面向 2026 届毕业生的招聘信息，含补录与往届可投的岗位。"
+    },
+    {
+      "slug": "s-any",
+      "name": "不限届别",
+      "group": "stage",
+      "tags": [
+        "不限届别"
+      ],
+      "definition": "不限届别、应届往届均可投的岗位。"
+    },
+    {
+      "slug": "e-sgcc",
+      "name": "国家电网",
+      "group": "employer",
+      "entityId": "sgcc",
+      "definition": "国家电网及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-cnpc",
+      "name": "中国石油",
+      "group": "employer",
+      "entityId": "cnpc",
+      "definition": "中国石油及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-sinopec",
+      "name": "中国石化",
+      "group": "employer",
+      "entityId": "sinopec",
+      "definition": "中国石化及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-cnooc",
+      "name": "中国海油",
+      "group": "employer",
+      "entityId": "cnooc",
+      "definition": "中国海油及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-spic",
+      "name": "国家电投",
+      "group": "employer",
+      "entityId": "spic",
+      "definition": "国家电投及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-cnnc",
+      "name": "中核集团",
+      "group": "employer",
+      "entityId": "cnnc",
+      "definition": "中核集团及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-cmcc",
+      "name": "中国移动",
+      "group": "employer",
+      "entityId": "cmcc",
+      "definition": "中国移动及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-cscec",
+      "name": "中国建筑",
+      "group": "employer",
+      "entityId": "cscec",
+      "definition": "中国建筑及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-crec",
+      "name": "中国中铁",
+      "group": "employer",
+      "entityId": "crec",
+      "definition": "中国中铁及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-crrc",
+      "name": "中国中车",
+      "group": "employer",
+      "entityId": "crrc",
+      "definition": "中国中车及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-comac",
+      "name": "中国商飞",
+      "group": "employer",
+      "entityId": "comac",
+      "definition": "中国商飞及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-china-resources",
+      "name": "华润集团",
+      "group": "employer",
+      "entityId": "china-resources",
+      "definition": "华润集团及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-cmg",
+      "name": "招商局",
+      "group": "employer",
+      "entityId": "cmg",
+      "definition": "招商局及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-sinomach",
+      "name": "国机集团",
+      "group": "employer",
+      "entityId": "sinomach",
+      "definition": "国机集团及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-icbc",
+      "name": "工商银行",
+      "group": "employer",
+      "entityId": "icbc",
+      "definition": "工商银行及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-ccb",
+      "name": "建设银行",
+      "group": "employer",
+      "entityId": "ccb",
+      "definition": "建设银行及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-abc",
+      "name": "农业银行",
+      "group": "employer",
+      "entityId": "abc",
+      "definition": "农业银行及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-boc",
+      "name": "中国银行",
+      "group": "employer",
+      "entityId": "boc",
+      "definition": "中国银行及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-cicc",
+      "name": "中金公司",
+      "group": "employer",
+      "entityId": "cicc",
+      "definition": "中金公司及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-big4",
+      "name": "四大会计师事务所",
+      "group": "employer",
+      "entityId": "big4",
+      "definition": "四大会计师事务所及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-catl",
+      "name": "宁德时代",
+      "group": "employer",
+      "entityId": "catl",
+      "definition": "宁德时代及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-byd",
+      "name": "比亚迪",
+      "group": "employer",
+      "entityId": "byd",
+      "definition": "比亚迪及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "e-huawei",
+      "name": "华为",
+      "group": "employer",
+      "entityId": "huawei",
+      "definition": "华为及其下属单位的校园招聘、社会招聘与实习信息。"
+    },
+    {
+      "slug": "p-beijing",
+      "name": "北京",
+      "group": "province",
+      "tags": [
+        "北京"
+      ],
+      "definition": "工作地点在北京的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-tianjin",
+      "name": "天津",
+      "group": "province",
+      "tags": [
+        "天津"
+      ],
+      "definition": "工作地点在天津的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-hebei",
+      "name": "河北",
+      "group": "province",
+      "tags": [
+        "河北"
+      ],
+      "definition": "工作地点在河北的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-shanxi",
+      "name": "山西",
+      "group": "province",
+      "tags": [
+        "山西"
+      ],
+      "definition": "工作地点在山西的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-innermongolia",
+      "name": "内蒙古",
+      "group": "province",
+      "tags": [
+        "内蒙古"
+      ],
+      "definition": "工作地点在内蒙古的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-liaoning",
+      "name": "辽宁",
+      "group": "province",
+      "tags": [
+        "辽宁"
+      ],
+      "definition": "工作地点在辽宁的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-jilin",
+      "name": "吉林",
+      "group": "province",
+      "tags": [
+        "吉林"
+      ],
+      "definition": "工作地点在吉林的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-heilongjiang",
+      "name": "黑龙江",
+      "group": "province",
+      "tags": [
+        "黑龙江"
+      ],
+      "definition": "工作地点在黑龙江的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-shanghai",
+      "name": "上海",
+      "group": "province",
+      "tags": [
+        "上海"
+      ],
+      "definition": "工作地点在上海的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-jiangsu",
+      "name": "江苏",
+      "group": "province",
+      "tags": [
+        "江苏"
+      ],
+      "definition": "工作地点在江苏的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-zhejiang",
+      "name": "浙江",
+      "group": "province",
+      "tags": [
+        "浙江"
+      ],
+      "definition": "工作地点在浙江的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-anhui",
+      "name": "安徽",
+      "group": "province",
+      "tags": [
+        "安徽"
+      ],
+      "definition": "工作地点在安徽的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-fujian",
+      "name": "福建",
+      "group": "province",
+      "tags": [
+        "福建"
+      ],
+      "definition": "工作地点在福建的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-jiangxi",
+      "name": "江西",
+      "group": "province",
+      "tags": [
+        "江西"
+      ],
+      "definition": "工作地点在江西的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-shandong",
+      "name": "山东",
+      "group": "province",
+      "tags": [
+        "山东"
+      ],
+      "definition": "工作地点在山东的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-henan",
+      "name": "河南",
+      "group": "province",
+      "tags": [
+        "河南"
+      ],
+      "definition": "工作地点在河南的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-hubei",
+      "name": "湖北",
+      "group": "province",
+      "tags": [
+        "湖北"
+      ],
+      "definition": "工作地点在湖北的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-hunan",
+      "name": "湖南",
+      "group": "province",
+      "tags": [
+        "湖南"
+      ],
+      "definition": "工作地点在湖南的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-guangdong",
+      "name": "广东",
+      "group": "province",
+      "tags": [
+        "广东"
+      ],
+      "definition": "工作地点在广东的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-guangxi",
+      "name": "广西",
+      "group": "province",
+      "tags": [
+        "广西"
+      ],
+      "definition": "工作地点在广西的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-hainan",
+      "name": "海南",
+      "group": "province",
+      "tags": [
+        "海南"
+      ],
+      "definition": "工作地点在海南的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-chongqing",
+      "name": "重庆",
+      "group": "province",
+      "tags": [
+        "重庆"
+      ],
+      "definition": "工作地点在重庆的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-sichuan",
+      "name": "四川",
+      "group": "province",
+      "tags": [
+        "四川"
+      ],
+      "definition": "工作地点在四川的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-guizhou",
+      "name": "贵州",
+      "group": "province",
+      "tags": [
+        "贵州"
+      ],
+      "definition": "工作地点在贵州的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-yunnan",
+      "name": "云南",
+      "group": "province",
+      "tags": [
+        "云南"
+      ],
+      "definition": "工作地点在云南的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-tibet",
+      "name": "西藏",
+      "group": "province",
+      "tags": [
+        "西藏"
+      ],
+      "definition": "工作地点在西藏的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-shaanxi",
+      "name": "陕西",
+      "group": "province",
+      "tags": [
+        "陕西"
+      ],
+      "definition": "工作地点在陕西的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-gansu",
+      "name": "甘肃",
+      "group": "province",
+      "tags": [
+        "甘肃"
+      ],
+      "definition": "工作地点在甘肃的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-qinghai",
+      "name": "青海",
+      "group": "province",
+      "tags": [
+        "青海"
+      ],
+      "definition": "工作地点在青海的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-ningxia",
+      "name": "宁夏",
+      "group": "province",
+      "tags": [
+        "宁夏"
+      ],
+      "definition": "工作地点在宁夏的招聘岗位与招考公告。"
+    },
+    {
+      "slug": "p-xinjiang",
+      "name": "新疆",
+      "group": "province",
+      "tags": [
+        "新疆"
+      ],
+      "definition": "工作地点在新疆的招聘岗位与招考公告。"
+    }
+  ]
+}

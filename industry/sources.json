@@ -1,0 +1,64 @@
+{
+  "$comment": "求职信息站信源。首批只导入两条**已实测可用**的信源：国聘（国资央企招聘平台的公告接口，POST JSON，无需鉴权）与北京市人社局事业单位公开招聘栏目（服务端渲染的 ul.list）。其余赛道按下面清单在后台 /admin/sources/new 逐条验证选择器后再加，不要一次全塞进来——选择器错的信源会一直报错、把告警刷满。待接入清单：①央国企补国聘校招专区 xiaoyuan.iguopin.com 与各集团官网（国家电网、中石油、中移动的招聘子站，多为 JS，需找 JSON 接口）②事业单位补 31 省人社厅：广东 hrss.gd.gov.cn、江苏 jshrss.jiangsu.gov.cn、浙江 rlsbt.zj.gov.cn、山东 hrss.shandong.gov.cn、四川 rst.sc.gov.cn、湖北 rst.hubei.gov.cn、湖南 rst.hunan.gov.cn、河南 hrss.henan.gov.cn，湖南/湖北/江西等省厅是 JS 渲染，改走官微 ③ESG 无集中源，靠国聘检索 + 四大与能源央企官网 + ESG 招聘类公众号 ④留学生靠高校就业中心与企业海外专场公众号（mp_account 需极致了 key）。注意：BOSS直聘/猎聘/智联/实习僧明确禁止抓取，不要接。",
+  "sources": [
+    {
+      "id": "iguopin-notice",
+      "name": "国聘·招聘公告",
+      "kind": "json_list",
+      "config": {
+        "url": "https://gp-api.iguopin.com/api/base/channelarticle/v1/list",
+        "mode": "json_api",
+        "method": "POST",
+        "headers": {
+          "Content-Type": "application/json",
+          "Origin": "https://www.iguopin.com",
+          "Referer": "https://www.iguopin.com/"
+        },
+        "bodyJson": {
+          "alias": "GP_news",
+          "page": 1,
+          "page_size": 30
+        },
+        "itemsPath": "data.list",
+        "titlePaths": ["title"],
+        "urlTemplate": "{raw:link_url}",
+        "publishedAtPath": "create_time",
+        "externalIdPath": "id",
+        "_aihot": {
+          "initialBackfillLimit": 20
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "iguopin",
+      "participation_mode": "editorial",
+      "interval_minutes": 120,
+      "tags": ["官方", "央国企"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    },
+    {
+      "id": "bj-rsj-sydw",
+      "name": "北京市人社局·事业单位公开招聘",
+      "kind": "web_list",
+      "config": {
+        "url": "https://rsj.beijing.gov.cn/xxgk/gkzp/",
+        "parseMode": "html",
+        "itemSelector": "ul.list > li",
+        "linkSelector": "a",
+        "titleSelector": "a",
+        "publishedAtSelector": "span",
+        "allowUrlPrefixes": ["https://rsj.beijing.gov.cn/xxgk/gkzp/"],
+        "_aihot": {
+          "initialBackfillLimit": 10
+        }
+      },
+      "tier": "T1",
+      "owner_entity_id": "bj-rsj",
+      "participation_mode": "editorial",
+      "interval_minutes": 180,
+      "tags": ["官方", "事业单位", "北京"],
+      "site_fulltext": false,
+      "syndicate_fulltext": false
+    }
+  ]
+}
