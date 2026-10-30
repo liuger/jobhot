@@ -5,7 +5,7 @@ import { renderSVG } from "uqr";
 import { SITE } from "@aihot/site";
 import { brandMark, clamp, h, nameMark, renderPng, SITE_HOST, type Node } from "./og.ts";
 
-export const POSTER_TEMPLATE_VERSION = "poster-2026-10-31.1";
+export const POSTER_TEMPLATE_VERSION = "poster-2026-10-31.2";
 const WIDTH = 1080;
 const HEIGHT = 1440;
 
@@ -17,7 +17,7 @@ export interface Poster {
   source: string;
   date: string;
   score: number | null;
-  /** Without the QR card the poster carries only text branding, for feeds that disallow QR codes. */
+  /** Without the QR card the poster is plain content plus a small site line, for feeds that disallow QR codes. */
   qr?: boolean;
 }
 
@@ -76,15 +76,7 @@ async function tree(p: Poster): Promise<Node> {
               ]),
             ],
           )
-        : h(
-            "div",
-            { display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "40px 40px", borderRadius: 32, backgroundColor: "#ffffff", boxShadow: "0 1px 2px rgba(14,25,27,0.06), 0 12px 32px rgba(14,25,27,0.07)" },
-            [
-              h("div", { display: "flex", fontSize: 40, fontWeight: 700, color: INK }, SITE.name),
-              h("div", { display: "flex", marginTop: 14, fontSize: 28, lineHeight: 1.5, color: "#66757a" }, SITE.tagline),
-              h("div", { display: "flex", marginTop: 20, fontSize: 26, color: ACCENT }, SITE_HOST),
-            ],
-          ),
+        : null,
       h("div", { display: "flex", justifyContent: "center", marginTop: 40, fontSize: 24, color: "#98a4a7" }, `${SITE.name} · ${SITE.tagline}`),
     ].filter(Boolean),
   );
