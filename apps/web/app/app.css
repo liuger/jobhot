@@ -6,9 +6,8 @@
 @source "../../../modules/*/{web.tsx,web/**}";
 
 /* ---------------------------------------------------------------------------
-   Design tokens: the site logo's palette — cream paper grounds, navy ink,
-   navy accent (steel blue in dark), orange highlights, hot red. Hairline
-   borders, no gradients.
+   Design tokens: warm off-white paper, ink text, one teal accent (cyan in
+   dark), hairline borders, no gradients.
    Components use the semantic names below; values change per theme only.
    --------------------------------------------------------------------------- */
 
@@ -95,58 +94,57 @@
   --gutter-l: max(16px, env(safe-area-inset-left));
   --gutter-r: max(16px, env(safe-area-inset-right));
   color-scheme: light;
-  /* Logo 色板：纸白 #FBF8F1、米白 #F4F0E8、深墨蓝 #16203C、橙 #EF8B33、红 #D63022。 */
-  --bg: #faf7f0;
-  --bg-sunk: #f3eee2;
-  --bg-muted: #ece6d8;
-  --surface: #fdfcf8;
-  --surface-2: #faf8f1;
-  --raised: #fdfcf8;
-  --sidebar: #f7f4eb;
-  --daybar: #f3eee2;
-  --field: #eee9dc;
-  --ink: #1c2534;
-  --ink-2: #2c3646;
-  --ink-3: #565e6e;
-  --ink-4: #6a7180;
-  --line: #e3ddcd;
-  --line-strong: #d4cbba;
-  --line-soft: #ece7d9;
-  --accent: #16203c;
-  --accent-ink: #1d2c4e;
-  --accent-soft: rgba(22, 32, 60, 0.09);
-  --accent-softer: rgba(22, 32, 60, 0.05);
-  --accent-contrast: #fbf8f1;
-  --note: #5e6b7e;
-  --hot: #d63022;
-  --hot-soft: rgba(214, 48, 34, 0.09);
-  --amber: #ef8b33;
-  --amber-ink: #a85a10;
-  --amber-soft: rgba(239, 139, 51, 0.13);
+  --bg: #faf9f6;
+  --bg-sunk: #f3f3ef;
+  --bg-muted: #e9ede9;
+  --surface: #ffffff;
+  --surface-2: #fdfdfb;
+  --raised: #ffffff;
+  --sidebar: #fdfdfb;
+  --daybar: #f0f2ee;
+  --field: #f0f2ee;
+  --ink: #202a30;
+  --ink-2: #303c42;
+  --ink-3: #59656b;
+  --ink-4: #657176;
+  --line: #dfe4e1;
+  --line-strong: #d1d9d5;
+  --line-soft: #e9ede9;
+  --accent: #176b75;
+  --accent-ink: #145f68;
+  --accent-soft: rgba(23, 107, 117, 0.08);
+  --accent-softer: rgba(23, 107, 117, 0.05);
+  --accent-contrast: #ffffff;
+  --note: #526f72;
+  --hot: #b3402a;
+  --hot-soft: rgba(179, 64, 42, 0.08);
+  --amber: #b8873a;
+  --amber-ink: #7c5a24;
+  --amber-soft: rgba(184, 135, 58, 0.1);
   --ok: #2f7d5c;
   --ok-soft: rgba(47, 125, 92, 0.1);
   --ok-ink: #2a6e51;
-  --rank-1: #d63022;
-  --rank-2: #c96a1a;
-  --rank-3: #a5731f;
-  --rank-rest: #7b7f88;
-  --shadow-card: 0 1px 2px rgba(30, 36, 54, 0.04);
-  --shadow-card-hover: 0 3px 12px rgba(30, 36, 54, 0.07);
-  --shadow-soft: 0 4px 12px rgba(24, 30, 48, 0.07);
-  --shadow-thumb: 0 1px 2px rgba(24, 30, 48, 0.1), 0 1px 1px rgba(24, 30, 48, 0.04);
-  --shadow-pop: 0 12px 32px rgba(24, 30, 48, 0.14);
-  --prose-ink: #232c3b;
-  --code-bg: #f5f2e9;
-  --code-keyword: #1f4e8c;
+  --rank-1: #b3402a;
+  --rank-2: #a3642f;
+  --rank-3: #96702e;
+  --rank-rest: #6b7684;
+  --shadow-card: 0 1px 2px rgba(32, 42, 48, 0.025);
+  --shadow-card-hover: 0 3px 12px rgba(32, 42, 48, 0.055);
+  --shadow-soft: 0 4px 12px rgba(28, 39, 51, 0.06);
+  --shadow-thumb: 0 1px 2px rgba(28, 39, 51, 0.1), 0 1px 1px rgba(28, 39, 51, 0.04);
+  --shadow-pop: 0 12px 32px rgba(28, 39, 51, 0.12);
+  --prose-ink: #26323a;
+  --code-bg: #f6f7f4;
+  --code-keyword: #006d77;
   --code-string: #2f6f44;
   --code-number: #9a6700;
   --code-title: #6f42c1;
   --code-variable: #a13d10;
   --code-meta: #b42348;
-  --selection: rgba(22, 32, 60, 0.14);
-  /* 朱丝栏（日报报头的红色界格）与题签描边。 */
-  --zhu-rule: #c96f66;
-  --zhu-rule-soft: #dea39b;
+  --selection: rgba(23, 107, 117, 0.16);
+  /* 朱丝栏（日报报头的红色界格）与题签描边，取 hot 色系。 */
+  --zhu-rule: #c97762;
+  --zhu-rule-soft: #dea89b;
 }
 
 @media (min-width: 961px) {
@@ -157,55 +155,55 @@
 
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg: #141824;
-  --bg-sunk: #1a1f2c;
-  --bg-muted: #232a3a;
-  --surface: #1b2130;
-  --surface-2: #1f2534;
-  --raised: #242b3b;
-  --sidebar: #161b27;
-  --daybar: #1a1f2c;
-  --field: rgba(240, 236, 224, 0.06);
-  --ink: #e9e4d5;
-  --ink-2: #d6d1c1;
-  --ink-3: #a19e91;
-  --ink-4: #85837a;
-  --line: rgba(240, 236, 224, 0.09);
-  --line-strong: rgba(240, 236, 224, 0.14);
-  --line-soft: rgba(240, 236, 224, 0.06);
-  --accent: #92b0d8;
-  --accent-ink: #a8c2e4;
-  --accent-soft: rgba(146, 176, 216, 0.13);
-  --accent-softer: rgba(146, 176, 216, 0.07);
-  --accent-contrast: #101a2e;
-  --note: #9fb0c4;
-  --hot: #e0564a;
-  --hot-soft: rgba(224, 86, 74, 0.13);
-  --amber: #f0a44e;
-  --amber-ink: #f0a44e;
-  --amber-soft: rgba(240, 164, 78, 0.12);
+  --bg: #13191c;
+  --bg-sunk: #182024;
+  --bg-muted: #202a2f;
+  --surface: #1a2226;
+  --surface-2: #1d272b;
+  --raised: #202a2f;
+  --sidebar: #161e21;
+  --daybar: #182024;
+  --field: rgba(255, 255, 255, 0.06);
+  --ink: #e7eceb;
+  --ink-2: #d2dada;
+  --ink-3: #a5b0b3;
+  --ink-4: #89979d;
+  --line: rgba(255, 255, 255, 0.08);
+  --line-strong: rgba(255, 255, 255, 0.12);
+  --line-soft: rgba(255, 255, 255, 0.06);
+  --accent: #12ccd8;
+  --accent-ink: #2ce2e8;
+  --accent-soft: rgba(18, 204, 216, 0.12);
+  --accent-softer: rgba(18, 204, 216, 0.06);
+  --accent-contrast: #000000;
+  --note: #8fb8a8;
+  --hot: #d86a52;
+  --hot-soft: rgba(216, 106, 82, 0.12);
+  --amber: #d3b26a;
+  --amber-ink: #d3b26a;
+  --amber-soft: rgba(211, 178, 106, 0.12);
   --ok: #5fc79a;
   --ok-soft: rgba(95, 199, 154, 0.12);
   --ok-ink: #7fd1ad;
-  --rank-1: #e0564a;
-  --rank-2: #f0a44e;
+  --rank-1: #d86a52;
+  --rank-2: #d18a5e;
   --rank-3: #d3b26a;
-  --rank-rest: #8a8d95;
+  --rank-rest: #7b869a;
   --shadow-card: none;
   --shadow-card-hover: none;
   --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.35);
   --shadow-thumb: 0 1px 2px rgba(0, 0, 0, 0.45);
   --shadow-pop: 0 16px 40px rgba(0, 0, 0, 0.45);
-  --prose-ink: #d8d3c2;
-  --code-bg: #161b27;
-  --code-keyword: #8fb8e8;
+  --prose-ink: #d7dfdf;
+  --code-bg: #10151c;
+  --code-keyword: #78dce8;
   --code-string: #a9dc76;
   --code-number: #ffd866;
   --code-title: #ab9df2;
   --code-variable: #fc9867;
   --code-meta: #ff6188;
-  --selection: rgba(146, 176, 216, 0.22);
-  --zhu-rule: #9a5148;
+  --selection: rgba(18, 204, 216, 0.22);
+  --zhu-rule: #a35a4e;
   --zhu-rule-soft: #6e4a42;
 }
 
@@ -223,12 +221,6 @@
     font-family: var(--font-sans);
     font-size: 14px;
     line-height: 1.5;
-    /* 宣纸帘纹：极淡的经纬肌理，只在浅色下可见。 */
-    background-image: repeating-linear-gradient(0deg, rgba(120, 100, 60, 0.022) 0 1px, transparent 1px 5px),
-      repeating-linear-gradient(90deg, rgba(120, 100, 60, 0.015) 0 1px, transparent 1px 7px);
-  }
-  [data-theme="dark"] body {
-    background-image: repeating-linear-gradient(0deg, rgba(255, 240, 200, 0.012) 0 1px, transparent 1px 5px);
   }
   ::selection {
     background: var(--selection);
@@ -363,6 +355,21 @@
 
 @keyframes spin-slow {
   to { transform: rotate(360deg); }
+}
+
+/* 点站点字标时，缺口环绕环心转一圈（components/shell/BrandLink.tsx 加这个类，转完回首页）。 */
+@keyframes spin-once {
+  to { transform: rotate(360deg); }
+}
+
+.logo-spin {
+  transform-box: view-box;
+  transform-origin: 210px 120px;
+  animation: spin-once 620ms cubic-bezier(0.55, 0, 0.35, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .logo-spin { animation: none; }
 }
 
 .animate-fade-up {
