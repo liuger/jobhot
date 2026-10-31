@@ -1,13 +1,14 @@
-// jobhot 品牌标记：一张岗位卡片（两白一橙三条条目）+ 右上角红色 hot 角标。
+// jobhot 品牌标记：一张岗位卡片（两白一青三条条目）+ 右上角 hot 角标。
 // 几何与 icons/logo.svg 完全一致（1024 设计坐标系），整块内联绘制，不依赖外部图片，也不依赖字体
 // （hot 已转成路径轮廓，任何环境打开都是同一字形）。
+// 配色跟随站点主题 token：卡片 --bg（暗）、条目 --bg/--accent（暗色青）、角标 --hot（暗色）。
 // size 是边长（正方形），要跟着文字走就传 size={20} 之类的小值。
 // 同一页面放多个实例时，给 id 传不同值，避免 clipPath 的 id 冲突。
-const NAVY = "#16203C";
-const BAR_WHITE = "#F4F0E8";
-const BAR_HOT = "#EF8B33";
-const TAG_RED = "#D63022";
-const TAG_TEXT = "#FBF8F1";
+const NAVY = "#13191c";
+const BAR_WHITE = "#faf9f6";
+const BAR_HOT = "#12ccd8";
+const TAG_RED = "#d86a52";
+const TAG_TEXT = "#faf9f6";
 
 // 卡片外框与圆角：红角标的裁剪与卡片共用同一组数值，边缘严丝合缝
 const CARD = { x: 227, y: 236, w: 569, h: 551, r: 19 };

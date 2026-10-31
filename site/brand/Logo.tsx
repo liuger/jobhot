@@ -1,26 +1,33 @@
-// 站点的字标、圆环标记和朱砂印：页面用 Wordmark 画站名（size 是高度，单位像素），RingMark 是小标记，
-// 转起来就是加载动画，Seal 是「招」字朱砂印，用在报头落款等处。
-// Wordmark 已换成正式 Logo：岗位卡片标记（LogoMark）+ 站名，导航侧栏、手机顶栏、后台登录页共用；
-// 文字颜色随 currentColor 走，明暗两种主题都正常。
-import { useId } from "react";
+// 站点的字标、圆环标记和朱砂印：页面用 Wordmark 画站名（size 是字标高度，单位像素），RingMark 是
+// 小标记，转起来就是加载动画，Seal 是「招」字朱砂印，用在报头落款等处。
+// 字标是定制矢量字（不用字体渲染）：几何等线大写 JOB，笔画 32（环加粗 36 做视觉补偿）、cap 高 160；
+// O 换成「缺口环 + 中心圆点」——即站内加载动画 RingMark 的造型，环与点取 accent 色（随主题变），
+// J / B 取 currentColor（跟随文字色，明暗主题都正常）。
+// 注意：直线笔画端点是 butt cap，中心线端点即墨迹端点，所以竖笔一律从 40 画到 200（cap 高的墨迹边界）；
+// B 的两碗横笔从 x=0 起补齐左角。环外径 84 比字母墨迹上下各多 4，画布取 34–206 全包。
+// 设计坐标系 434×172，光学字距圆-直 30。图形标（LogoMark.tsx / logo.svg）只留给 favicon 和 PWA 图标。
 import { SITE } from "../site.ts";
-import { LogoMark } from "./LogoMark.tsx";
 
-export function Wordmark({ size = 24, className = "", title = SITE.name }: { size?: number; className?: string; title?: string }) {
-  // 同一页面会同时挂桌面侧栏和手机顶栏两份 Wordmark，LogoMark 里的 clipPath 用 id 区分，这里保证唯一。
-  const uid = useId().replace(/[^a-zA-Z0-9_-]/g, "");
+export function Wordmark({ size = 26, className = "", title = SITE.name, spin = false }: { size?: number; className?: string; title?: string; spin?: boolean }) {
   return (
-    <span
-      className={`inline-flex items-center font-semibold leading-none tracking-[-0.01em] ${className}`}
-      style={{ gap: Math.round(size * 0.34) }}
-      aria-label={title}
-      role="img"
-    >
-      <LogoMark size={size} id={`logo-${uid}`} title={title} />
-      <span aria-hidden="true" style={{ fontSize: Math.round(size * 0.72) }}>
-        {SITE.name}
-      </span>
-    </span>
+    <svg viewBox="0 34 434 172" style={{ height: size, width: "auto" }} role="img" aria-label={title} className={className}>
+      <g fill="none" strokeWidth={32} strokeLinejoin="miter" strokeLinecap="butt">
+        {/* J：竖笔（顶端与 O 齐顶）+ 深钩 r64 */}
+        <path d="M80 40 V120 A64 64 0 0 1 16 184" stroke="currentColor" />
+        {/* 缺口环（O）：缺口在右上，环加粗 36；环 + 圆点 = RingMark 的造型，取 accent 色。
+            spin 时整组绕环心转一圈（.logo-spin，transform-origin 就是环心 210,120）。 */}
+        <g className={spin ? "logo-spin" : undefined}>
+          <path d="M236 61 A66 66 0 1 0 269 94" stroke="var(--accent)" strokeWidth={36} />
+          <circle cx="210" cy="120" r="13" fill="var(--accent)" stroke="none" />
+        </g>
+        {/* B：竖笔贯穿 40–200，两碗横笔从左缘起（无缺角），上小下大碗 */}
+        <path
+          d="M340 40 V200 M324 56 H382 A30 30 0 0 1 382 116 H324 M324 120 H386 A32 32 0 0 1 386 184 H324"
+          stroke="currentColor"
+          strokeLinejoin="round"
+        />
+      </g>
+    </svg>
   );
 }
 
