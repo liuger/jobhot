@@ -26,8 +26,9 @@ function atOffset(y: string | number, mo: string | number, d: string | number, h
 
 /**
  * A published date as a source prints it. Date.parse is kept only where it reads the same
- * on every host: a time with its zone, and an ISO date alone (UTC midnight). Anything else it would read
- * in the server's local zone (UTC in Docker), so "2026-09-26 10:00" is read in the source's offset instead.
+ * on every host: a time with its zone. Anything else it would read in the server's local
+ * zone (UTC in Docker), so "2026-09-26 10:00" and a bare "2026-09-26" are read in the
+ * source's offset instead (a Chinese page's bare date means Beijing midnight, not UTC).
  */
 export function parseLooseDate(value: string | null | undefined, utcOffset = "+08:00"): Date | null {
   if (!value) return null;
@@ -45,7 +46,7 @@ export function parseLooseDate(value: string | null | undefined, utcOffset = "+0
   }
   if (!numeric && !english) return null;
   const text = v.replace(/(\d)(st|nd|rd|th)\b/gi, "$1");
-  if (EXPLICIT_ZONE.test(v) || /^\d{4}-\d{2}-\d{2}$/.test(v)) {
+  if (EXPLICIT_ZONE.test(v)) {
     const direct = Date.parse(text);
     if (Number.isFinite(direct)) return new Date(direct);
     if (!numeric) return null;

@@ -63,8 +63,10 @@ function toDate(v: unknown, unit: string | undefined, utcOffset: string | undefi
     const d = m ? new Date(`${m[1]}-${m[2]}-${m[3]}T00:00:00Z`) : null;
     return d && Number.isFinite(d.getTime()) && d.toISOString().startsWith(`${m![1]}-${m![2]}-${m![3]}`) ? d : null;
   }
-  // A time without a zone is in the source's offset, as list pages read it; any other text as Date.parse reads it.
-  if (ZONELESS_TIME.test(text)) return parseLooseDate(text, utcOffset);
+  // A time without a zone is in the source's offset, as list pages read it. A bare calendar date
+  // too: Date.parse would read "2026-10-31" as UTC midnight, eight hours off a Chinese page's
+  // own day start, which pushes a fresh entry into the future and out of the timeline.
+  if (ZONELESS_TIME.test(text) || /^\d{4}[-/.]\d{1,2}[-/.]\d{1,2}$/.test(text)) return parseLooseDate(text, utcOffset);
   const t = Date.parse(text);
   if (Number.isFinite(t)) return new Date(t);
   // Dates a source prints with units — "2026年10月29日", "2026/10/29" — which Date.parse leaves unread.
