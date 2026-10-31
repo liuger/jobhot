@@ -1,4 +1,5 @@
-// /deadline：报名截止倒计时页。按剩余天数从近到远排列，三天内标红。
+// /deadline：报名截止倒计时页。未截止的按剩余天数从近到远排列，三天内标红；
+// 已截止的默认收起，点开才看。
 import { useEffect, useState } from "react";
 import { SITE } from "@aihot/site";
 
@@ -40,15 +41,21 @@ const TONE_CLASS: Record<"hot" | "amber" | "ok" | "muted", string> = {
 export default function DeadlinePage() {
   const [rows, setRows] = useState<Row[] | null>(null);
   const [tab, setTab] = useState<string | null>(null);
+  const [showExpired, setShowExpired] = useState(false);
 
   useEffect(() => {
     setRows(null);
+    setShowExpired(false);
     const qs = tab ? `?category=${tab}` : "";
     fetch(`/api/jobs/deadline/list${qs}`)
       .then((r) => r.json())
       .then((d: { items: Row[] }) => setRows(d.items))
       .catch(() => setRows([]));
   }, [tab]);
+
+  const list = rows ?? [];
+  const open = list.filter((r) => r.days >= 0);
+  const expired = list.filter((r) => r.days < 0);
 
   return (
     <main className="mx-auto max-w-3xl px-5 py-12">
@@ -78,35 +85,77 @@ export default function DeadlinePage() {
 
       {rows === null ? (
         <p className="mt-10 text-[14px] text-ink-4">加载中…</p>
-      ) : rows.length === 0 ? (
+      ) : list.length === 0 ? (
         <p className="mt-10 rounded-xl border border-line bg-surface px-5 py-6 text-center text-[14px] text-ink-3">
           暂无收录中的公告。有新公告并写明报名截止日期后，会自动出现在这里。
         </p>
       ) : (
-        <ul className="mt-8">
-          {rows.map((r) => {
-            const d = daysLabel(r.days);
-            return (
-              <li key={r.item_id} className="border-b border-line py-4">
-                <div className="flex items-baseline gap-3">
-                  <span className="min-w-0 flex-1 text-[15px] font-semibold leading-[1.5] text-ink">
-                    <a href={`/items/${r.item_id}`} className="transition-colors hover:text-accent">
-                      {r.title}
-                    </a>
-                  </span>
-                  <span className={`shrink-0 rounded-full px-2.5 py-0.5 text-[12px] font-semibold ${TONE_CLASS[d.tone]}`}>
-                    {d.text}
-                  </span>
-                </div>
-                <p className="mt-1 text-[12.5px] text-ink-4">
-                  {r.company ? `${r.company} · ` : ""}
-                  截止 {r.deadline}
-                  {r.source_name ? ` · 来源：${r.source_name}` : ""}
-                </p>
-              </li>
-            );
-          })}
-        </ul>
+        <>
+          <ul className="mt-8">
+            {open.map((r) => {
+              const d = daysLabel(r.days);
+              return (
+                <li key={r.item_id} className="border-b border-line py-4">
+                  <div className="flex items-baseline gap-3">
+                    <span className="min-w-0 flex-1 text-[15px] font-semibold leading-[1.5] text-ink">
+                      <a href={`/items/${r.item_id}`} className="transition-colors hover:text-accent">
+                        {r.title}
+                      </a>
+                    </span>
+                    <span className={`shrink-0 rounded-full px-2.5 py-0.5 text-[12px] font-semibold ${TONE_CLASS[d.tone]}`}>
+                      {d.text}
+                    </span>
+                  </div>
+                  <p className="mt-1 text-[12.5px] text-ink-4">
+                    {r.company ? `${r.company} · ` : ""}
+                    截止 {r.deadline}
+                    {r.source_name ? ` · 来源：${r.source_name}` : ""}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+
+          {expired.length > 0 && (
+            <div className="mt-8">
+              <button
+                type="button"
+                onClick={() => setShowExpired((v) => !v)}
+                aria-expanded={showExpired}
+                className="flex w-full items-center justify-between rounded-xl border border-line bg-surface px-4 py-3 text-[13.5px] text-ink-3 transition-colors hover:border-ink-4"
+              >
+                <span>已截止的公告 · {expired.length} 条</span>
+                <span className="text-[12.5px] text-ink-4">{showExpired ? "收起 ▲" : "点击查看 ▼"}</span>
+              </button>
+              {showExpired && (
+                <ul>
+                  {expired.map((r) => {
+                    const d = daysLabel(r.days);
+                    return (
+                      <li key={r.item_id} className="border-b border-line py-4">
+                        <div className="flex items-baseline gap-3">
+                          <span className="min-w-0 flex-1 text-[15px] font-semibold leading-[1.5] text-ink-3">
+                            <a href={`/items/${r.item_id}`} className="transition-colors hover:text-accent">
+                              {r.title}
+                            </a>
+                          </span>
+                          <span className={`shrink-0 rounded-full px-2.5 py-0.5 text-[12px] font-semibold ${TONE_CLASS[d.tone]}`}>
+                            {d.text}
+                          </span>
+                        </div>
+                        <p className="mt-1 text-[12.5px] text-ink-4">
+                          {r.company ? `${r.company} · ` : ""}
+                          截止 {r.deadline}
+                          {r.source_name ? ` · 来源：${r.source_name}` : ""}
+                        </p>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </div>
+          )}
+        </>
       )}
     </main>
   );
