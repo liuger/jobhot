@@ -71,6 +71,8 @@ export const JOB_DEADLINE_MODULE = defineServerModule({
       const cat = q.category && (CATEGORIES as readonly string[]).includes(q.category) ? q.category : null;
       // 分类筛选走两条独立查询，避免在模板里拼可选的 SQL 片段
       // limitDays 要显式转 int：驱动把参数发成 unknown，date + unknown 会让 PG 报「运算符不唯一」(42725)
+      // 排序：未截止在前、离截止越近越靠前；已截止垫底、刚截止的在前，截止越久越靠后
+      // （已截止用镜像日期 current_date + (current_date - deadline) 参与同一列升序）
       const rows = cat
         ? await sql<Row[]>`
             SELECT item_id, title, company, category,
@@ -81,7 +83,9 @@ export const JOB_DEADLINE_MODULE = defineServerModule({
             WHERE deadline <= current_date + ${limitDays}::int
               AND deadline >= current_date - 14
               AND category = ${cat}
-            ORDER BY deadline ASC
+            ORDER BY (deadline >= current_date) DESC,
+              CASE WHEN deadline >= current_date THEN deadline
+                   ELSE current_date + (current_date - deadline) END ASC
             LIMIT 200`
         : await sql<Row[]>`
             SELECT item_id, title, company, category,
@@ -91,7 +95,9 @@ export const JOB_DEADLINE_MODULE = defineServerModule({
             FROM job_deadline
             WHERE deadline <= current_date + ${limitDays}::int
               AND deadline >= current_date - 14
-            ORDER BY deadline ASC
+            ORDER BY (deadline >= current_date) DESC,
+              CASE WHEN deadline >= current_date THEN deadline
+                   ELSE current_date + (current_date - deadline) END ASC
             LIMIT 200`;
       return reply
         .header("cache-control", "public, max-age=300")
