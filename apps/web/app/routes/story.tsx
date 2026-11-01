@@ -39,7 +39,7 @@ export function meta({ loaderData }: Route.MetaArgs) {
     type: "article",
     jsonLd: [
       storyLd(s),
-      breadcrumbLd([{ name: SITE.name, path: "/" }, { name: "热点榜", path: "/hot" }, { name: s.title, path: `/story/${s.publicId}` }]),
+      breadcrumbLd([{ name: SITE.name, path: "/" }, { name: "热招榜", path: "/hot" }, { name: s.title, path: `/story/${s.publicId}` }]),
     ],
   });
 }
@@ -236,10 +236,10 @@ export default function StoryPage() {
 
   return (
     <div className="mx-auto max-w-[var(--page-max-reading)] pb-10">
-      <PhoneBar back={{ to: "/hot", label: "热点" }} title={story.title} />
+      <PhoneBar back={{ to: "/hot", label: "热招" }} title={story.title} />
       <nav aria-label="位置" className="hidden items-center gap-2.5 pb-5 pt-4 text-[12px] text-ink-4 lg:flex">
         <Link to="/hot" className="inline-flex items-center gap-1.5 transition-colors hover:text-ink">
-          <IconArrowLeft size={15} /> 热点榜
+          <IconArrowLeft size={15} /> 热招榜
         </Link>
         <span className="h-3 w-px bg-line-strong" aria-hidden="true" />
         <span>事件详情</span>

@@ -110,7 +110,7 @@ export function llmsTxt(opts: {
   lines.push("");
   lines.push("## 网站主要页面", "");
   lines.push(`- [首页 · 精选](${u("/")}): ${subjectAfter("每日", "精选动态")}`);
-  lines.push(`- [${withSubject("热点榜")}](${u("/hot")}): 过去 48 小时内被多个独立信源${subjectAfter("共同讨论的", "事件")}；可进入事件页查看最新进展、热度变化、报道时间线和 AI 综述`);
+  lines.push(`- [${withSubject("热招企业榜")}](${u("/hot")}): 过去 48 小时内公开列表上新岗位最多的企业（按招聘渠道聚合，岗位多者在前）；点击企业可查看其最新发布的岗位`);
   lines.push(`- [全部动态](${u("/all")}): ${subjectAfter("全量", "资讯流")}，可按分类筛选`);
   if (opts.hasDailies) {
     lines.push(`- [${withSubject("日报")}](${u("/daily")}): ${subjectAfter("每日", "行业精编汇总")}`);

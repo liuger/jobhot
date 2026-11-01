@@ -26,7 +26,7 @@ const api = createServer((req, res) => {
     res.setHeader("Cache-Control", "public, max-age=30, s-maxage=30");
     return res.end(JSON.stringify({ filters, cards: [], nextCursor: null, dayCounts: [], hot: null }));
   }
-  if (url.pathname === "/api/site/hot") return res.end(JSON.stringify({ entries: [] }));
+  if (url.pathname === "/api/site/companies") return res.end(JSON.stringify({ computedAt: "2026-10-31T12:00:00.000Z", windowHours: 48, entries: [] }));
   if (url.pathname === "/api/site/echo-client") return res.end(JSON.stringify({ forwarded: req.headers["x-forwarded-for"], real: req.headers["x-real-ip"] }));
   if (url.pathname === "/api/site/download") {
     res.setHeader("Content-Type", "text/markdown; charset=utf-8");

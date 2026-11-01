@@ -94,6 +94,38 @@ export interface HotStripEntry {
   participantCount: number;
 }
 
+/** A company's newest position on the companies board: the entry's link and its time. */
+export interface CompanyPositionRef {
+  id: string;
+  title: string;
+  at: string;
+}
+
+/**
+ * 热招企业条与榜单的一行：过去窗口内公开列表上新岗位最多的企业。
+ * 招聘公告不会被多家信源共同报道，事件热度榜在这里常年凑不满；
+ * 企业的新岗位数才是招聘语境自己的热度。
+ */
+export interface CompanyStripEntry {
+  rank: number;
+  /** 企业名，从招聘源名聚合而来（"招商证券·社会招聘" → 招商证券）。 */
+  company: string;
+  /** 旗下招聘渠道里最好的信源权重（T1、T1_5、T2 …），同分排序用，也给读者一个 quietly 的质量提示。 */
+  tier: string | null;
+  /** 窗口内可公开列出的新岗位数。 */
+  positions: number;
+  /** 最新一个岗位：榜单条目的落地链接。 */
+  latest: CompanyPositionRef;
+  /** 参与聚合的招聘渠道全名。 */
+  sourceNames: string[];
+}
+
+export interface HotCompaniesResponse {
+  computedAt: string;
+  windowHours: number;
+  entries: CompanyStripEntry[];
+}
+
 export interface TimelineFilters {
   channel: ChannelKey;
   category: CategoryKey | null;
@@ -104,7 +136,7 @@ export interface TimelineResponse {
   filters: TimelineFilters;
   cards: TimelineCard[];
   nextCursor: string | null;
-  hot: HotStripEntry[] | null;
+  hot: CompanyStripEntry[] | null;
   dayCounts: Record<string, number>;
 }
 

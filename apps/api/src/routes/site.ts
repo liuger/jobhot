@@ -9,7 +9,8 @@ import { loadPool, SearchBusyError } from "@aihot/backend/publication/pool";
 import { loadTimeline } from "@aihot/backend/publication/timeline";
 import { loadStoryFollowups } from "@aihot/backend/publication/followups";
 import { loadGroupReports } from "@aihot/backend/publication/groups";
-import { hotSearchLinks, loadHotStrip } from "@aihot/backend/publication/hot";
+import { hotSearchLinks } from "@aihot/backend/publication/hot";
+import { loadCompanyStrip, loadHotCompanies } from "@aihot/backend/publication/companies";
 import { loadChangelog, siteMeta } from "@aihot/backend/site/meta";
 import { loadContact, loadMakerAvatar } from "@aihot/backend/site/contact";
 import { loadSiteStats } from "@aihot/backend/site/stats";
@@ -68,7 +69,7 @@ export function registerSite(app: FastifyInstance) {
     const unfiltered = filters.channel === "all" && !filters.category && !filters.tag && !q.cursor;
     const [data, hot] = await Promise.all([
       loadTimeline({ ...filters, cursor: q.cursor || null, limit }),
-      unfiltered ? loadHotStrip() : null,
+      unfiltered ? loadCompanyStrip() : null,
     ]);
     // Any cache in front and the home page built from this answer share one absolute deadline.
     reply.header("X-Accel-Expires", `@${Math.floor(Date.now() / 1000) + 60}`);
@@ -153,6 +154,11 @@ export function registerSite(app: FastifyInstance) {
   app.get("/api/site/hot", siteHandler(async (req, reply) => {
     const data = await loadHot();
     return sendJsonWithEtag(req, reply, data, { etagPrefix: "hot", cacheControl: "public, max-age=30, s-maxage=30" });
+  }));
+
+  // 热招企业榜（/hot 页与首页顶部条共用）。
+  app.get("/api/site/companies", siteHandler(async (req, reply) => {
+    return sendJsonWithEtag(req, reply, await loadHotCompanies(), { etagPrefix: "companies", cacheControl: "public, max-age=60, s-maxage=60" });
   }));
 
   app.get("/api/site/stories/:publicId", siteHandler(async (req, reply) => {
